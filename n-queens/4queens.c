@@ -1,5 +1,29 @@
 #include<stdio.h>
 #include<stdbool.h>
+void showArray(int x[4][4]);
+
+bool isValid(int x[4][4], int r, int c)
+{
+	int i,j;
+	for(i = 0; i<=c; i++)
+		if(x[r][i])return false;
+	return true;
+}
+
+void main()
+{
+	int x[4][4]={
+		{0,0,0,0},
+		{0,0,0,0},
+		{0,0,0,0},
+		{0,0,0,0}
+	};
+	if(isValid(x,0,3));
+	{
+		x[0][3] = 1;
+	}
+	showArray(x);
+}
 void showArray(int x[4][4])
 {
 	int i,j;
@@ -11,18 +35,4 @@ void showArray(int x[4][4])
 		}
 		printf("\n");
 	}
-}
-void main()
-{
-	int x[4][4]={
-		{0,0,0,0},
-		{0,0,0,0},
-		{0,0,0,0},
-		{0,0,0,0}
-	};
-	// if(isValid(x,3,3));
-	// {
-		// x[3][3] = 1;
-	// }
-	showArray(x);
 }
