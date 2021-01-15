@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdbool.h>
-void showArray(int x[4][4]);
+void printArray(int x[4][4]);
 
 bool isValid(int x[4][4], int r, int c)
 {
@@ -18,10 +18,26 @@ bool isValid(int x[4][4], int r, int c)
 		if(x[i][j])return false;
 
 	//checking / direction
-	for(i=r,j=c; i>=0 && j<=4; i--, j++)
+	for(i=r,j=c; i>=0 && j<4; i--, j++)
 		if(x[i][j])return false;
 	
 	return true;
+}
+
+bool show(int x[4][4], int r)
+{
+	int j;
+	if(r==4)return true;
+	for(j=0;j<4;j++)
+	{
+		if(isValid(x,r,j))
+		{
+			x[r][j] = 1;
+			if(show(x,r+1))return true;
+			x[r][j] = 0;
+		}
+	}
+	return false;	
 }
 
 void main()
@@ -32,14 +48,10 @@ void main()
 		{0,0,0,0},
 		{0,0,0,0}
 	};
-	int i=1, j=1;
-	if(isValid(x,i,j))
-	{
-		x[i][j] = 1;
-	}
-	showArray(x);
+	show(x,0);	
+	printArray(x);
 }
-void showArray(int x[4][4])
+void printArray(int x[4][4])
 {
 	int i,j;
 	for(i=0;i<4;i++)
