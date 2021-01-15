@@ -5,22 +5,29 @@ void showArray(int x[4][4]);
 bool isValid(int x[4][4], int r, int c)
 {
 	int i,j;
-	for(i = 0; i<=c; i++)
-		if(x[r][i])return false;
+	//checking the row
+	for(j = c; j>=0; j--)
+		if(x[r][j])return false;
+	
+	//checking the column
+	for(i = r; i>=0; i--)
+		if(x[i][c])return false;
+	
 	return true;
 }
 
 void main()
 {
 	int x[4][4]={
-		{0,0,0,0},
+		{0,1,0,0},
 		{0,0,0,0},
 		{0,0,0,0},
 		{0,0,0,0}
 	};
-	if(isValid(x,0,3));
+	int i=1, j=1;
+	if(isValid(x,i,j))
 	{
-		x[0][3] = 1;
+		x[i][j] = 1;
 	}
 	showArray(x);
 }
