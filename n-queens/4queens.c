@@ -13,13 +13,21 @@ bool isValid(int x[4][4], int r, int c)
 	for(i = r; i>=0; i--)
 		if(x[i][c])return false;
 	
+	//checking \ direction
+	for(i=r,j=c; i>=0 && j>=0; i--, j--)
+		if(x[i][j])return false;
+
+	//checking / direction
+	for(i=r,j=c; i>=0 && j<=4; i--, j++)
+		if(x[i][j])return false;
+	
 	return true;
 }
 
 void main()
 {
 	int x[4][4]={
-		{0,1,0,0},
+		{0,0,0,0},
 		{0,0,0,0},
 		{0,0,0,0},
 		{0,0,0,0}
