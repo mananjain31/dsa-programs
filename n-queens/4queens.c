@@ -5,9 +5,6 @@ void printArray(int x[4][4]);
 bool isValid(int x[4][4], int r, int c)
 {
 	int i,j;
-	//checking the row
-	for(j = c; j>=0; j--)
-		if(x[r][j])return false;
 	
 	//checking the column
 	for(i = r; i>=0; i--)
@@ -29,25 +26,19 @@ bool show(int x[4][4], int r)
 	int j;
 	if(r==4)return true;
 	for(j=0;j<4;j++)
-	{
 		if(isValid(x,r,j))
 		{
 			x[r][j] = 1;
 			if(show(x,r+1))return true;
 			x[r][j] = 0;
 		}
-	}
+		
 	return false;	
 }
 
 void main()
 {
-	int x[4][4]={
-		{0,0,0,0},
-		{0,0,0,0},
-		{0,0,0,0},
-		{0,0,0,0}
-	};
+	int x[4][4]={0};
 	show(x,0);	
 	printArray(x);
 }
