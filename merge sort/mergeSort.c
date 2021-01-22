@@ -14,6 +14,7 @@ void mergeSort(int x[], int n)
 	for(i=0;i<m2;i++) b[i] = x[m1+i];
 	mergeSort(a,m1);
 	mergeSort(b,m2);
+	printf("test");
 }
 
 void main()
