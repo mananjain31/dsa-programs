@@ -1,7 +1,9 @@
 #include<stdio.h>
 void split();
 void merge();
-void main(){
+void display(int[],int);
+void main()
+{
 	int n,i;
 	printf("Enter No. of elements to perform Merge sort: ");
 	scanf("%d", &n);
@@ -12,6 +14,10 @@ void main(){
 		scanf("%d",&x[i]);
 	}
 	printf("Sorted Array is : \n");
-	for(i = 0; i<n; i++)
-		printf("%d ", x[i]);
+	display(x,n);
+}
+void display(int x[], int n)
+{
+	int i;
+	for(i=0;i<n;i++)printf("%d ", x[i]);
 }
