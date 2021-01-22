@@ -1,7 +1,7 @@
 #include<stdio.h>
-void mergeSort(int[],int);
-void merge();
-void display(int[],int);
+void mergeSort(int x[],int n);
+void merge(int a[], int b[], int x[], int m1, int m2);
+void display(int x[],int n);
 
 void mergeSort(int x[], int n)
 {
@@ -14,7 +14,17 @@ void mergeSort(int x[], int n)
 	for(i=0;i<m2;i++) b[i] = x[m1+i];
 	mergeSort(a,m1);
 	mergeSort(b,m2);
-	printf("test");
+	merge(a,b,x,m1,m2);
+}
+
+void merge(int a[], int b[], int x[], int m1, int m2)
+{
+	int i=0,j=0,k=0;
+	while(i<m1 && j<m2)
+		if(a[i] < b[j]) x[k++] = a[i++]; 
+		else x[k++] = b[j++]; 
+	while(i < m1) x[k++] = a[i++];
+	while(j < m2) x[k++] = b[j++];
 }
 
 void main()
@@ -32,6 +42,7 @@ void main()
 	printf("Sorted Array is : \n");
 	display(x,n);
 }
+
 void display(int x[], int n)
 {
 	int i;
