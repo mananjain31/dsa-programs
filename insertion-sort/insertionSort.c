@@ -1,3 +1,4 @@
+//Insertion Sort Program in c 
 #include<stdio.h>
 void insertionSort(int x[], int n)
 {
@@ -31,5 +32,6 @@ void main()
 		scanf("%d",&x[i]);
 	}
 	insertionSort(x, n);
+	printf("Sorted Array after Insertion Sort is: \n");
 	display(x, n);
 }
