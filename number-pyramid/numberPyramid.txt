@@ -1,0 +1,13 @@
+Question:
+	for any input n
+	let n be 5
+
+	output:
+
+	1
+	12
+	123
+	1234
+	12345
+
+constrains: use only single loop and no ruccursion should be used
