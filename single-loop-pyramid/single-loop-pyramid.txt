@@ -1,0 +1,14 @@
+Question:
+	print a pyramid like this :
+	
+	let n = 4 then,
+	output:
+	
+	*
+	**
+	***
+	****
+	
+	with single loop and without reccursion
+
+
