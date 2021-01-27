@@ -4,7 +4,26 @@
 	using recursion only
 	and recursion of  function : show()
 	with 2 parameters is only allowed
+
+show(8,6)
+
+show(int r, int c)
+
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #include<stdio.h>
 #include<stdbool.h>
@@ -12,7 +31,6 @@ void show(int r, int c)
 {
 	//end point of recusion
 	if(r==0 || c==0)return;
-	
 	
 	//initialising static var 
 	//when fresh call of this function
@@ -47,5 +65,7 @@ void main()
 {
 	show(8,6);
 	printf("\n");
-	show(2,3);
+	show(2,3);	
+	printf("\n");
+	show(5,6);
 }
