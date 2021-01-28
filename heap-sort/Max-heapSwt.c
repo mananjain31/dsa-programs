@@ -18,13 +18,18 @@ void show(int x[],int i, int n)
 			max = r;
 		}
 	}
-	else if(l<n && x[i] < x[l])
+	else if(l<n)
 	{
-		t = x[i];
-		x[i] = x[max];
-		x[max] = t;
-		show(x, max, n);
+		max = l;
 	}
+	
+	if(max!=i && x[i] < x[max])
+		{
+			t = x[i];
+			x[i] = x[max];
+			x[max] = t;
+			show(x, max, n);
+		}
 }
 void showLoop(int x[], int n)
 {
