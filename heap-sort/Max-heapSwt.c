@@ -6,16 +6,19 @@ void show(int x[],int i, int n)
 	int r = 2*i + 2;
 	int t;
 	int max = i;
-	if(l<n && x[l] > x[r])
+
+	if(r<n)
 	{
-		max = l;
+		if( x[l] > x[r])
+		{
+			max = l;
+		}
+		if( x[r] > x[l])
+		{
+			max = r;
+		}
 	}
-	if(r<n && x[r] > x[l])
-	{
-		max = r;
-	}
-	
-	if(x[i] < x[max])
+	else if(l<n && x[i] < x[l])
 	{
 		t = x[i];
 		x[i] = x[max];
