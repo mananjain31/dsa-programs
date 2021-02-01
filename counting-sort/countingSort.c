@@ -13,6 +13,9 @@ void countingSort(int x[], int n)
 	for(i = 0; i<n; i++)
 		a[x[i]]++;
 	
+	for(i = 1; i<max; i++)
+		a[i]+=a[i-1];
+	
 	for(i = 0; i<max; i++)
 		printf("%d ",a[i]);
 	printf("\n");
