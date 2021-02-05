@@ -2,16 +2,14 @@
 void countingSort(int x[], int n)
 {
 	int i,min = x[0],max = x[0];
-	for(i = 0; i<n; i++)
+	for(i = 1; i<n; i++)
 	{
 		if(x[i] > max)
 			max = x[i];
-	}
-	
-	for(i=1;i<n;i++)
 		if(min>x[i])
 			min = x[i];
-	
+	}
+
 	max++;
 	
 	int a[max-min];
