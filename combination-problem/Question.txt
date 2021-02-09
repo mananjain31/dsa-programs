@@ -1,0 +1,2 @@
+for the given array of characters we have to show all the 3 character combinations 
+of them and display them..
