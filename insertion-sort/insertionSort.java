@@ -8,7 +8,22 @@ class insertionSort
 			System.out.print(i+" ");
 		}
 	}
-	
+	void sort(int x[])
+	{
+		int i,j;
+		int n=x.length;
+		for(i=1; i<n; i++)
+		{
+			int value = x[i];
+			for(j=i-1;j>=0;j--)
+			{
+				if(value < x[j])
+					x[j+1] = x[j];
+				else break;
+			}
+			x[j+1] = value;
+		}
+	}
 	public static void main(String...args)
 	{
 		Scanner sc = new Scanner(System.in);
@@ -23,8 +38,8 @@ class insertionSort
 		}
 		
 		insertionSort m =new insertionSort();
-		//m.sort(x);
-		//System.out.println("Sorted using Insertion Sort : ");
+		m.sort(x);
+		System.out.println("Sorted using Insertion Sort : ");
 		m.display(x);
 
 	}
