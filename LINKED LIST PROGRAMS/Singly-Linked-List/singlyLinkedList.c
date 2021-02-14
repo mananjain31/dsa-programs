@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 void insertAtB(int x);
+void insertAtEnd(int x);
 void showAll();
 struct Node
 {
@@ -10,7 +11,6 @@ struct Node
 struct Node *start = NULL;
 int main()
 {
-	int run = 1;
 	int data, c=-1;
 	while(c)
 	{
@@ -18,19 +18,25 @@ int main()
 		printf("\nSingly Linked List\n");
 		//Operations Available:
 		printf("0. Exit\n");
-		printf("1. Insert At Beginning\n");
-		printf("2. Show All Data\n");
+		printf("1. Show All Data\n");
+		printf("2. Insert At Beginning\n");
+		printf("3. Insert At Ending\n");
 		printf("Enter Your Choice: ");
 		scanf("%d",&c);
 		switch(c)
 		{
 			case 1:
+				showAll();
+				break;
+			case 2:
 				printf("Enter Data: ");
 				scanf("%d",&data);
 				insertAtB(data);
 				break;
-			case 2:
-				showAll();
+			case 3:
+				printf("Enter Data: ");
+				scanf("%d",&data);
+				insertAtEnd(data);
 				break;
 			case 0:
 				break;
@@ -40,10 +46,27 @@ int main()
 }
 void insertAtB(int x)
 {
-	struct Node *temp = malloc(sizeof(struct Node));
+	struct Node *temp = (struct Node*)malloc(sizeof(struct Node));
 	temp->data = x;
 	temp->next = start;
 	start = temp;
+}
+void insertAtEnd(int x)
+{
+	if(start == NULL)
+	{
+		insertAtB(x);
+		return;
+	}
+	struct Node *temp = start;
+	while(temp -> next!=NULL)
+	{
+		temp = temp -> next;
+	}
+	struct Node *temp2 = (struct Node*)malloc(sizeof(struct Node));
+	temp2 -> data = x;
+	temp2 -> next = NULL;
+	temp -> next = temp2;
 }
 void showAll()
 {
