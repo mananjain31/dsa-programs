@@ -11,6 +11,8 @@ void deleteAtSData(int x);
 void updateSData(int x, int x1);
 int searchData(int x);
 int countNodes();
+void findMinVal();
+void findMaxVal();
 void showAll();
 struct Node
 {
@@ -39,6 +41,8 @@ int main()
 		printf("10. Delete At Specific Position\n");
 		printf("11. Delete Node Having Specific Data\n");
 		printf("12. Update Specific Data\n");
+		printf("13. Find Minimum Value\n");
+		printf("14. Find Maximum Value\n");
 		printf("Enter Your Choice : ");
 		scanf("%d",&c);
 		switch(c)
@@ -104,6 +108,12 @@ int main()
 				printf("Enter Updated Data : ");
 				scanf("%d",&data2);
 				updateSData(data, data2);
+				break;
+			case 13:
+				findMinVal();
+				break;
+			case 14:
+				findMaxVal();
 				break;
 		}
 	}
@@ -310,4 +320,37 @@ void updateSData(int x, int x1)
 	}
 	printf("Given data not found\n");
 	return;
+}
+
+void findMinVal()
+{
+	if(start == NULL)
+	{
+		printf("Empty List\n");
+		return;
+	}
+	int min = start -> data;
+	struct Node *temp = start;
+	while(temp != NULL)
+	{
+		if(temp -> data < min) min = temp -> data;
+		temp = temp -> next;
+	}
+	printf("Minimun Value is : %d\n", min);
+}
+void findMaxVal()
+{
+	if(start == NULL)
+	{
+		printf("Empty List\n");
+		return;
+	}
+	int max = start -> data;
+	struct Node *temp = start;
+	while(temp != NULL)
+	{
+		if(temp -> data > max) max = temp -> data;
+		temp = temp -> next;
+	}
+	printf("Maximum Value is : %d\n", max);
 }
