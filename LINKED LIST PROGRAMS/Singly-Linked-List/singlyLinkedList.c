@@ -1,5 +1,10 @@
 #include<stdio.h>
 #include<stdlib.h>
+struct Node
+{
+	int data;
+	struct Node *next;
+};
 void insertAtB(int x);
 void deleteAtB();
 void insertAtEnd(int x);
@@ -15,11 +20,8 @@ void findMinVal();
 void findMaxVal();
 void showAll();
 void reverseList();
-struct Node
-{
-	int data;
-	struct Node *next;
-};
+void showAllRev();
+void showRev(struct Node*);
 struct Node *start = NULL;
 int main()
 {
@@ -45,6 +47,7 @@ int main()
 		printf("13. Find Minimum Value\n");
 		printf("14. Find Maximum Value\n");
 		printf("15. Reverse List\n");
+		printf("16. Traverse In Reverse Order\n");
 		printf("Enter Your Choice : ");
 		scanf("%d",&c);
 		switch(c)
@@ -119,6 +122,9 @@ int main()
 				break;
 			case 15:
 				reverseList();
+				break;
+			case 16:
+				showAllRev();
 				break;
 		}
 	}
@@ -376,3 +382,14 @@ void reverseList()
 	start = temp1;
 }
 
+void showAllRev()
+{
+	showRev(start);
+	printf("\n");
+}
+void showRev(struct Node* temp)
+{
+	if(temp == NULL) return;
+	showRev(temp -> next);
+	printf("%d ", temp -> data);
+}
