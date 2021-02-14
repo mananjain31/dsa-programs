@@ -8,6 +8,7 @@ void insertAtSPos(int x, int p);
 void deleteAtSPos(int p);
 void insertAfterSData(int x, int x2);
 void deleteAtSData(int x);
+void updateSData(int x, int x1);
 int searchData(int x);
 int countNodes();
 void showAll();
@@ -37,6 +38,7 @@ int main()
 		printf("9. Delete At Ending\n");
 		printf("10. Delete At Specific Position\n");
 		printf("11. Delete Node Having Specific Data\n");
+		printf("12. Update Specific Data\n");
 		printf("Enter Your Choice : ");
 		scanf("%d",&c);
 		switch(c)
@@ -95,6 +97,13 @@ int main()
 				printf("Enter Data : ");
 				scanf("%d",&data);
 				deleteAtSData(data);
+				break;
+			case 12:
+				printf("Enter Data which need to be updated : ");
+				scanf("%d",&data);
+				printf("Enter Updated Data : ");
+				scanf("%d",&data2);
+				updateSData(data, data2);
 				break;
 		}
 	}
@@ -280,4 +289,25 @@ void deleteAtSData(int x)
 		}
 		temp = temp -> next;
 	}
+}
+
+void updateSData(int x, int x1)
+{
+	if(start == NULL)
+	{
+		printf("List Empty\n");
+		return;
+	}
+	struct Node *temp = start;
+	while(temp != NULL)
+	{
+		if(temp -> data == x)
+		{
+			temp -> data = x1;
+			return;
+		}
+		temp = temp -> next;
+	}
+	printf("Given data not found\n");
+	return;
 }
