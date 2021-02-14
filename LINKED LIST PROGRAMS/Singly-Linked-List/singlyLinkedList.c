@@ -5,6 +5,7 @@ void deleteAtB();
 void insertAtEnd(int x);
 void deleteAtEnd();
 void insertAtSPos(int x, int p);
+void deleteAtSPos(int p);
 void insertAfterSData(int x, int x2);
 int searchData(int x);
 int countNodes();
@@ -33,6 +34,7 @@ int main()
 		printf("7. Insert Node after Specific Data \n");
 		printf("8. Delete At Beginning\n");
 		printf("9. Delete At Ending\n");
+		printf("10. Delete At Specific Position\n");
 		printf("Enter Your Choice : ");
 		scanf("%d",&c);
 		switch(c)
@@ -81,6 +83,11 @@ int main()
 				break;
 			case 9:
 				deleteAtEnd();
+				break;
+			case 10:
+				printf("Enter Position : ");
+				scanf("%d",&pos);
+				deleteAtSPos(pos);
 				break;
 		}
 	}
@@ -146,7 +153,7 @@ void insertAtSPos(int x,int p)
 	{
 		struct Node *temp = start;
 		struct Node *temp2 = (struct Node*) malloc(sizeof(struct Node*));
-		for(int i = 1; i < p - 1; i++)
+		for(int i = 1; i < p -1 ; i++)
 		{
 			temp = temp -> next;
 		}
@@ -216,4 +223,32 @@ void deleteAtEnd()
 	}
 	free(temp -> next);
 	temp -> next = NULL;
+}
+void deleteAtSPos(int p)
+{
+	if(p == 1)
+	{
+		deleteAtB();
+		return;
+	}
+	if(p == countNodes())
+	{
+		deleteAtEnd();
+		return;
+	}
+	if(p > 1 && p < countNodes())
+	{
+		struct Node *temp = start;
+		for(int i = 1; i < p - 1; i++)
+		{
+			temp = temp -> next;
+		}
+		struct Node *temp2 = temp -> next;
+		temp -> next = temp -> next -> next;
+		free(temp2);
+	}
+	else
+	{
+		printf("Invalid Position\n");
+	}
 }
