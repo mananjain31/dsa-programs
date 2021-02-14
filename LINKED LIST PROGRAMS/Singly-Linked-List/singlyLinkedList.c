@@ -2,6 +2,8 @@
 #include<stdlib.h>
 void insertAtB(int x);
 void insertAtEnd(int x);
+// void insertAtSP(int x);
+int countNodes();
 void showAll();
 struct Node
 {
@@ -11,7 +13,7 @@ struct Node
 struct Node *start = NULL;
 int main()
 {
-	int data, c=-1;
+	int data, pos, c=-1;
 	while(c)
 	{
 		//MAIN LINKED LIST CODE :
@@ -19,30 +21,64 @@ int main()
 		//Operations Available:
 		printf("0. Exit\n");
 		printf("1. Show All Data\n");
-		printf("2. Insert At Beginning\n");
-		printf("3. Insert At Ending\n");
-		printf("Enter Your Choice: ");
+		printf("2. Count Nodes\n");
+		printf("3. Insert At Beginning\n");
+		printf("4. Insert At Ending\n");
+		// printf("4. Insert Node at Specific Position \n");
+		printf("Enter Your Choice : ");
 		scanf("%d",&c);
 		switch(c)
 		{
+			case 0:
+				break;
 			case 1:
 				showAll();
 				break;
 			case 2:
-				printf("Enter Data: ");
+				printf("No. of nodes: %d\n",countNodes());
+				break;
+			case 3:
+				printf("Enter Data : ");
 				scanf("%d",&data);
 				insertAtB(data);
 				break;
-			case 3:
-				printf("Enter Data: ");
+			case 4:
+				printf("Enter Data : ");
 				scanf("%d",&data);
 				insertAtEnd(data);
 				break;
-			case 0:
-				break;
+			// case 5:
+				// printf("Enter Data : ");
+				// scanf("%d",&data);
+				// printf("Enter Position : ");
+				// scanf("%d",&pos);
+				// insertAtSP(data, pos);
+				// break;
+			
 		}
 	}
 	return 0;
+}
+void showAll()
+{
+	struct Node *temp = start;
+	while(temp!=NULL)
+	{
+		printf("%d ",temp->data);
+		temp=temp->next;
+	}
+	printf("\n");
+}
+int countNodes()
+{
+	int i=0;
+	struct Node *temp = start;
+	while(temp!=NULL)
+	{
+		i++;
+		temp = temp -> next;
+	}
+	return i;
 }
 void insertAtB(int x)
 {
@@ -68,13 +104,8 @@ void insertAtEnd(int x)
 	temp2 -> next = NULL;
 	temp -> next = temp2;
 }
-void showAll()
-{
-	struct Node *temp = start;
-	while(temp!=NULL)
-	{
-		printf("%d ",temp->data);
-		temp=temp->next;
-	}
-	printf("\n");
-}
+
+// void insertAtSP(int x,int p)
+// {
+	
+// }
