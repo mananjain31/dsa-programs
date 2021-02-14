@@ -3,7 +3,7 @@
 void insertAtB(int x);
 void insertAtEnd(int x);
 void insertAtSPos(int x, int p);
-//void insertAfterSData(int x, int p);
+void insertAfterSData(int x, int x2);
 int countNodes();
 void showAll();
 struct Node
@@ -14,7 +14,7 @@ struct Node
 struct Node *start = NULL;
 int main()
 {
-	int data, pos, c=-1;
+	int data, data2, pos, c=-1;
 	while(c)
 	{
 		//MAIN LINKED LIST CODE :
@@ -26,6 +26,7 @@ int main()
 		printf("3. Insert At Beginning\n");
 		printf("4. Insert At Ending\n");
 		printf("5. Insert Node at Specific Position \n");
+		printf("6. Insert Node after Specific Data \n");
 		printf("Enter Your Choice : ");
 		scanf("%d",&c);
 		switch(c)
@@ -54,6 +55,13 @@ int main()
 				printf("Enter Position : ");
 				scanf("%d",&pos);
 				insertAtSPos(data, pos);
+				break;
+			case 6:
+				printf("Enter Data after which to insert : ");
+				scanf("%d",&data2);
+				printf("Enter Data To insert : ");
+				scanf("%d",&data);
+				insertAfterSData(data, data2);
 				break;
 		}
 	}
@@ -131,4 +139,26 @@ void insertAtSPos(int x,int p)
 	{
 		printf("Invalid Position\n");
 	}
+}
+void insertAfterSData(int x, int x2)
+{
+	if(start  == NULL)
+	{
+		printf("List Empty\n");
+		return;
+	}
+	struct Node *temp = start;
+	while(temp != NULL)
+	{
+		if(temp -> data  == x2)
+		{
+			struct Node *temp2 = (struct Node*) malloc(sizeof(struct Node));
+			temp2 -> data = x;
+			temp2 -> next = temp -> next;
+			temp -> next = temp2;
+			return;
+		}
+		temp = temp -> next;
+	}
+	printf("Given data not found\n");
 }
