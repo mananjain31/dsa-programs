@@ -14,6 +14,7 @@ int countNodes();
 void findMinVal();
 void findMaxVal();
 void showAll();
+void reverseList();
 struct Node
 {
 	int data;
@@ -43,6 +44,7 @@ int main()
 		printf("12. Update Specific Data\n");
 		printf("13. Find Minimum Value\n");
 		printf("14. Find Maximum Value\n");
+		printf("15. Reverse List\n");
 		printf("Enter Your Choice : ");
 		scanf("%d",&c);
 		switch(c)
@@ -114,6 +116,9 @@ int main()
 				break;
 			case 14:
 				findMaxVal();
+				break;
+			case 15:
+				reverseList();
 				break;
 		}
 	}
@@ -354,3 +359,20 @@ void findMaxVal()
 	}
 	printf("Maximum Value is : %d\n", max);
 }
+
+void reverseList()
+{
+	struct Node *temp1 = NULL;
+	struct Node *temp2 = start;
+	struct Node *temp3;
+	if(start == NULL) return;
+	while(temp2 != NULL)
+	{
+		temp3 = temp2 -> next;
+		temp2 -> next = temp1;
+		temp1 = temp2;
+		temp2 = temp3;
+	}
+	start = temp1;
+}
+
