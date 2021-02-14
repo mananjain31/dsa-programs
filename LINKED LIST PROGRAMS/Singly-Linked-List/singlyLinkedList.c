@@ -7,6 +7,7 @@ void deleteAtEnd();
 void insertAtSPos(int x, int p);
 void deleteAtSPos(int p);
 void insertAfterSData(int x, int x2);
+void deleteAtSData(int x);
 int searchData(int x);
 int countNodes();
 void showAll();
@@ -35,6 +36,7 @@ int main()
 		printf("8. Delete At Beginning\n");
 		printf("9. Delete At Ending\n");
 		printf("10. Delete At Specific Position\n");
+		printf("11. Delete Node Having Specific Data\n");
 		printf("Enter Your Choice : ");
 		scanf("%d",&c);
 		switch(c)
@@ -88,6 +90,11 @@ int main()
 				printf("Enter Position : ");
 				scanf("%d",&pos);
 				deleteAtSPos(pos);
+				break;
+			case 11:
+				printf("Enter Data : ");
+				scanf("%d",&data);
+				deleteAtSData(data);
 				break;
 		}
 	}
@@ -250,5 +257,27 @@ void deleteAtSPos(int p)
 	else
 	{
 		printf("Invalid Position\n");
+	}
+}
+
+void deleteAtSData(int x)
+{
+	if(start == NULL)return;
+	if(start -> data == x)
+	{
+		deleteAtB();
+		return;
+	}
+	struct Node* temp = start;
+	while(temp -> next != NULL)
+	{
+		if(temp -> next -> data == x)
+		{
+			struct Node *temp2 = temp -> next;
+			temp -> next = temp -> next -> next;
+			free(temp2);
+			return;
+		}
+		temp = temp -> next;
 	}
 }
