@@ -4,6 +4,7 @@ void insertAtB(int x);
 void insertAtEnd(int x);
 void insertAtSPos(int x, int p);
 void insertAfterSData(int x, int x2);
+int searchData(int x);
 int countNodes();
 void showAll();
 struct Node
@@ -21,12 +22,13 @@ int main()
 		printf("\nSingly Linked List\n");
 		//Operations Available:
 		printf("0. Exit\n");
-		printf("1. Show All Data\n");
-		printf("2. Count Nodes\n");
-		printf("3. Insert At Beginning\n");
-		printf("4. Insert At Ending\n");
-		printf("5. Insert Node at Specific Position \n");
-		printf("6. Insert Node after Specific Data \n");
+		printf("1. Count Nodes\n");
+		printf("2. Show All Data\n");
+		printf("3. Search Data \n");
+		printf("4. Insert At Beginning\n");
+		printf("5. Insert At Ending\n");
+		printf("6. Insert Node at Specific Position \n");
+		printf("7. Insert Node after Specific Data \n");
 		printf("Enter Your Choice : ");
 		scanf("%d",&c);
 		switch(c)
@@ -34,29 +36,36 @@ int main()
 			case 0:
 				break;
 			case 1:
-				showAll();
-				break;
-			case 2:
 				printf("No. of nodes: %d\n",countNodes());
 				break;
+			case 2:
+				showAll();
+				break;
 			case 3:
-				printf("Enter Data : ");
+				printf("Enter Data To Search : ");
 				scanf("%d",&data);
-				insertAtB(data);
+				int index = searchData(data);
+				if(index == -1) printf("Data not Found\n");
+				else printf("Data found at Index : %d\n",index);
 				break;
 			case 4:
 				printf("Enter Data : ");
 				scanf("%d",&data);
-				insertAtEnd(data);
+				insertAtB(data);
 				break;
 			case 5:
+				printf("Enter Data : ");
+				scanf("%d",&data);
+				insertAtEnd(data);
+				break;
+			case 6:
 				printf("Enter Data : ");
 				scanf("%d",&data);
 				printf("Enter Position : ");
 				scanf("%d",&pos);
 				insertAtSPos(data, pos);
 				break;
-			case 6:
+			case 7:
 				printf("Enter Data after which to insert : ");
 				scanf("%d",&data2);
 				printf("Enter Data To insert : ");
@@ -162,3 +171,17 @@ void insertAfterSData(int x, int x2)
 	}
 	printf("Given data not found\n");
 }
+
+int searchData(int x)
+{
+	int i = -1;
+	struct Node *temp = start;
+	while(temp != NULL)
+	{
+		i++;
+		if(temp -> data == x)return i;
+		temp = temp -> next;
+	}
+	return -1;
+}
+
