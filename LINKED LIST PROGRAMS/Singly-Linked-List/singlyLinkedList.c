@@ -3,6 +3,7 @@
 void insertAtB(int x);
 void deleteAtB();
 void insertAtEnd(int x);
+void deleteAtEnd();
 void insertAtSPos(int x, int p);
 void insertAfterSData(int x, int x2);
 int searchData(int x);
@@ -31,6 +32,7 @@ int main()
 		printf("6. Insert Node at Specific Position \n");
 		printf("7. Insert Node after Specific Data \n");
 		printf("8. Delete At Beginning\n");
+		printf("9. Delete At Ending\n");
 		printf("Enter Your Choice : ");
 		scanf("%d",&c);
 		switch(c)
@@ -76,6 +78,9 @@ int main()
 				break;
 			case 8:
 				deleteAtB();
+				break;
+			case 9:
+				deleteAtEnd();
 				break;
 		}
 	}
@@ -196,5 +201,19 @@ void deleteAtB()
 	start = start -> next;
 	free(temp);
 }
-
-
+void deleteAtEnd()
+{
+	if(start == NULL) return;
+	struct Node *temp = start;
+	if(start -> next == NULL)
+	{
+		deleteAtB();
+		return;
+	}		
+	while(temp -> next -> next!= NULL)
+	{
+		temp = temp -> next;
+	}
+	free(temp -> next);
+	temp -> next = NULL;
+}
