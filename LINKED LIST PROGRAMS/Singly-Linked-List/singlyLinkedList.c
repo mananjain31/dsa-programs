@@ -16,8 +16,7 @@ void deleteAtSData(int x);
 void updateSData(int x, int x1);
 int searchData(int x);
 int countNodes();
-void findMinVal();
-void findMaxVal();
+void findMinMaxVal();
 void showAll();
 void reverseList();
 void showAllRev();
@@ -44,10 +43,9 @@ int main()
 		printf("10. Delete At Specific Position\n");
 		printf("11. Delete Node Having Specific Data\n");
 		printf("12. Update Specific Data\n");
-		printf("13. Find Minimum Value\n");
-		printf("14. Find Maximum Value\n");
-		printf("15. Reverse List\n");
-		printf("16. Traverse In Reverse Order\n");
+		printf("13. Find Minimum and Maximum Value\n");
+		printf("14. Reverse List\n");
+		printf("15. Traverse In Reverse Order\n");
 		printf("Enter Your Choice : ");
 		scanf("%d",&c);
 		switch(c)
@@ -115,15 +113,12 @@ int main()
 				updateSData(data, data2);
 				break;
 			case 13:
-				findMinVal();
+				findMinMaxVal();
 				break;
 			case 14:
-				findMaxVal();
-				break;
-			case 15:
 				reverseList();
 				break;
-			case 16:
+			case 15:
 				showAllRev();
 				break;
 		}
@@ -333,7 +328,7 @@ void updateSData(int x, int x1)
 	return;
 }
 
-void findMinVal()
+void findMinMaxVal()
 {
 	if(start == NULL)
 	{
@@ -341,28 +336,15 @@ void findMinVal()
 		return;
 	}
 	int min = start -> data;
-	struct Node *temp = start;
-	while(temp != NULL)
-	{
-		if(temp -> data < min) min = temp -> data;
-		temp = temp -> next;
-	}
-	printf("Minimun Value is : %d\n", min);
-}
-void findMaxVal()
-{
-	if(start == NULL)
-	{
-		printf("Empty List\n");
-		return;
-	}
 	int max = start -> data;
 	struct Node *temp = start;
 	while(temp != NULL)
 	{
+		if(temp -> data < min) min = temp -> data;
 		if(temp -> data > max) max = temp -> data;
 		temp = temp -> next;
 	}
+	printf("Minimun Value is : %d\n", min);
 	printf("Maximum Value is : %d\n", max);
 }
 
