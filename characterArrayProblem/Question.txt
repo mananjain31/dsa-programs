@@ -1,0 +1,33 @@
+In c programming,
+Without the use of any extra Pre Defined function
+except printf() and
+Without Using any extra Array we have to:
+
+let input is : "i am manan jain  31 "
+output : " 31  jain manan am i"
+
+We can use user defined function
+
+Code:
+
+#include<stdio.h>
+//inset lines code below this
+
+//inset lines code above this
+int main()
+{
+	char x[]="i am manan jain  31 ";
+//inset lines code below this
+
+//inset lines code above this
+	printf("%s\n",x);
+	return 0;
+}
+
+Expected output : " 31  jain manan am i"
+
+for 
+char x[]="   100 hundered"
+Expected output : "hundered 100   "
+
+  
