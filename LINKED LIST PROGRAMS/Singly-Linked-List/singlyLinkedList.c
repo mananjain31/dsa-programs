@@ -27,7 +27,7 @@ void showRev(struct Node*);
 bool checkPallindrome();
 int countOccurence(int x);
 void removeDupliSorted();
-void removeDupliSorted();
+void removeDupliUnSorted();
 struct Node* getNode(int p);
 int middle();
 struct Node *start = NULL;
@@ -59,7 +59,7 @@ int main()
 		printf("17. Check Pallindrome\n");
 		printf("18. Count Occurence of Specific Data\n");
 		printf("19. get Nth Node\n");
-		printf("20.	Sort and Remove Duplicate data\n");
+		printf("20. Sort and Remove Duplicate data\n");
 		printf("21. Remove Duplicate data Without Sorting\n");
 		printf("22. Print Middle Element\n");
 		printf("Enter Your Choice : ");
@@ -166,10 +166,13 @@ int main()
 			case 20:
 				removeDupliSorted();
 				break;
-			case 22:
-				if(countNodes()>1)
-				printf("middle element is : %d\n", middle());
+			case 21:
+				removeDupliUnSorted();
 				break;
+			// case 22:
+				// if(countNodes()>1)
+				// printf("middle element is : %d\n", middle());
+				// break;
 		}
 	}
 	return 0;
@@ -510,38 +513,59 @@ void removeDupliSorted()
 	printf("%d\n",n);
 	if(start == NULL || start -> next == NULL) return;
 	struct Node *temp = start;
-	for(int i = 1; i < n; i++)
+	for(int i = 1; i < n;)
 	{
 		if(temp->data == temp->next->data)
+		{
 			deleteAtSPos(i+1);
-		showAll();
-		n--;
-		if(temp->data != temp->next->data) temp = temp -> next;
+			showAll();
+			n--;
+		}
+		else
+		{
+			temp = temp -> next;
+			i++;
+		}
 	}
 }
 
-void removeDupliSorted()
+void removeDupliUnSorted()
 {
-	bubbleSort();
 	int n = countNodes();
 	printf("%d\n",n);
 	if(start == NULL || start -> next == NULL) return;
-	struct Node *temp = start;
-	for(int i = 1; i < n; i++)
+	struct Node *temp ;
+	struct Node *temp2 ;
+	for(int j = 1; j < n; j++)	
 	{
-		if(temp->data == temp->next->data)
-			deleteAtSPos(i+1);
-		showAll();
-		n--;
-		if(temp->data != temp->next->data) temp = temp -> next;
+		temp = getNode(j);
+		temp2 = getNode(j);
+		for(int i = j; i < n;)
+		{
+			if(temp2 -> next -> data == temp -> data) 
+			{
+				deleteAtSPos(i+1);
+				n--;
+			}
+			else
+			{
+				temp2 = temp2-> next; 
+				i++;
+			}
+		}
+		// if(j<n)
+		// {
+			// temp = temp -> next;
+		// }
 	}
 }
 
 int middle()
 {
-	int n = (countNodes()+1)/2;
-	struct Node *temp = start;
-	for(int i = 1; i<n; i++)
-		temp = temp -> next;
-	return temp -> data;
+	// int n = (countNodes()+1)/2;
+	// struct Node *temp = start;
+	// for(int i = 1; i<n; i++)
+		// temp = temp -> next;
+	// return temp -> data;
+	return 0;
 }
