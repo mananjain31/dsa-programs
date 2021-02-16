@@ -31,6 +31,10 @@ void removeDupliUnSorted();
 struct Node* getNode(int p);
 int middle();
 void lastToFirst();
+void sortNstore(int x);
+// void quickSort();
+// void showQuickSort(int b, int e);
+
 // void swapNodes(int a, int b);
 
 struct Node *start = NULL;
@@ -66,6 +70,7 @@ int main()
 		printf("21. Remove Duplicate data Without Sorting\n");
 		printf("22. Get Middle Element\n");
 		printf("23. Move Last element to Beginning\n");
+		printf("24. Store data in sorted Order\n");
 		// printf("23. Swap Two Nodes\n");
 		printf("Enter Your Choice : ");
 		scanf("%d",&c);
@@ -183,12 +188,11 @@ int main()
 			case 23:
 				lastToFirst();
 				break;
-				// printf("1st Data to swap : ");
-				// scanf("%d",&data);
-				// printf("2nd Data to swap : ");
-				// scanf("%d",&data2);
-				// swapNodes(data, data2);
-				// break;
+			case 24:
+				printf("Enter Data : ");
+				scanf("%d",&data);
+				sortNstore(data);
+				break;
 		}
 	}
 	return 0;
@@ -578,6 +582,50 @@ int middle()
 	return getNode(n) -> data;
 }
 
+
+void lastToFirst()
+{
+	if(start == NULL)
+		return;
+	if(start->next == NULL)
+		return;
+	struct Node* temp = start;
+	while(temp->next->next != NULL)
+		temp = temp -> next;
+	temp->next->next = start;
+	start = temp->next;
+	temp -> next = NULL;
+}
+
+void sortNstore(int x)
+{
+	// bubbleSort();
+	if(start == NULL)
+	{
+		insertAtB(x);
+		return;
+	}
+	struct Node* temp = start;
+	if(temp->data >= x) 
+	{
+		insertAtB(x);
+		return;
+	}
+	while(temp->next != NULL)
+	{
+		if(temp->next->data > x)
+		{
+			struct Node* new = (struct Node*)malloc(sizeof(struct Node*));
+			new->data = x;
+			new->next = temp->next;
+			temp->next = new;	
+			return;
+		}
+		temp = temp->next;
+	}
+	insertAtEnd(x);
+}
+
 // void swapNodes(int a, int b)
 // {
 	// if(a == b) return;
@@ -608,16 +656,39 @@ int middle()
 	// t1->next  = temp; 	
 // }
 
-void lastToFirst()
-{
-	if(start == NULL)
-		return;
-	if(start->next == NULL)
-		return;
-	struct Node* temp = start;
-	while(temp->next->next != NULL)
-		temp = temp -> next;
-	temp->next->next = start;
-	start = temp->next;
-	temp -> next = NULL;
-}
+// void quickSort()
+// {
+	// int n = countNodes();
+	// showQuickSort(1,n);
+// }
+
+// void showQuickSort(int b, int e)
+// {
+	// if(b==e || b>e) return;
+	// int i=b,j=e;
+	// int p = b;
+	// int pivot = getNode(b)->data;
+	// i++;
+	// while(i<j)
+	// {
+		// while(getNode(i)->data > pivot && i<j)
+		// {
+			// swapData(getNode(i),getNode(j));
+			// showAll();
+			// j--;
+		// }
+		// i++;
+		// while(getNode(j)->data < pivot  && i<j)
+		// {
+			// swapData(getNode(i),getNode(j));
+			// showAll();
+			// i++;
+		// }
+		// j--;
+	// }
+	// swapData(getNode(p),getNode(j));
+	// showAll();
+	// printf("out\n");
+	// showQuickSort(b,j);
+	// showQuickSort(j,e);
+// }
