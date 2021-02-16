@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<stdbool.h>
 struct Node
 {
 	int data;
@@ -20,7 +21,10 @@ void findMinMaxVal();
 void showAll();
 void reverseList();
 void showAllRev();
+void bubbleSort();
+void swapData(struct Node*, struct Node*);
 void showRev(struct Node*);
+bool checkPallindrome();
 struct Node *start = NULL;
 int main()
 {
@@ -46,6 +50,8 @@ int main()
 		printf("13. Find Minimum and Maximum Value\n");
 		printf("14. Reverse List\n");
 		printf("15. Traverse In Reverse Order\n");
+		printf("16. Bubble Sort \n");
+		printf("17. Check Pallindrome\n");
 		printf("Enter Your Choice : ");
 		scanf("%d",&c);
 		switch(c)
@@ -120,6 +126,13 @@ int main()
 				break;
 			case 15:
 				showAllRev();
+				break;
+			case 16:
+				bubbleSort();
+				break;
+			case 17:;
+				if(checkPallindrome())printf("The List is Pallindrome");
+				else printf("The List is not Pallindrome");
 				break;
 		}
 	}
@@ -374,4 +387,59 @@ void showRev(struct Node* temp)
 	if(temp == NULL) return;
 	showRev(temp -> next);
 	printf("%d ", temp -> data);
+}
+
+void bubbleSort()
+{
+	if(start == NULL || start->next == NULL) return;
+	struct Node *temp = start;
+	int n = countNodes();
+	showAll();
+	for(int i = 1; i < n ; i++)
+	{
+		temp = start;
+		for(int j = i; j < n; j++)
+		{	
+			if(temp->data > temp->next->data)
+			{
+				swapData(temp, temp->next);
+			}
+			temp = temp -> next;
+		}
+		showAll();
+	}
+}
+
+void swapData(struct Node *a, struct Node *b)
+{
+	int t = a->data;
+	a->data = b->data;
+	b->data = t;	
+}
+
+
+bool checkPallindrome()
+{
+	if(start == NULL) return false;
+	if(start->next == NULL) return true;
+	struct Node *s1 = start;
+	struct Node *b1;
+	struct Node *b2 = NULL;
+	int n = countNodes();
+	for(int i = 1; i <= n/2; i++)
+	{
+		b1 = start;
+		s1 = start;
+		while(b1->next != b2)
+		{
+			b1 = b1 -> next;
+		}
+		b2 = b1;
+		for(int j = 1; j < i; j++)
+		{
+			s1 = s1 -> next;
+		}
+		if(s1 -> data != b1 -> data) return false;
+	}
+	return true;
 }
