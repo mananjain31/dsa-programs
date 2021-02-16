@@ -61,7 +61,7 @@ int main()
 		printf("19. get Nth Node\n");
 		printf("20. Sort and Remove Duplicate data\n");
 		printf("21. Remove Duplicate data Without Sorting\n");
-		printf("22. Print Middle Element\n");
+		printf("22. Get Middle Element\n");
 		printf("Enter Your Choice : ");
 		scanf("%d",&c);
 		switch(c)
@@ -169,10 +169,12 @@ int main()
 			case 21:
 				removeDupliUnSorted();
 				break;
-			// case 22:
-				// if(countNodes()>1)
-				// printf("middle element is : %d\n", middle());
-				// break;
+			case 22:
+				if(countNodes()>1)
+					printf("middle element is : %d\n", middle());
+				else
+					printf("Empty list\n");
+				break;
 		}
 	}
 	return 0;
@@ -553,19 +555,11 @@ void removeDupliUnSorted()
 				i++;
 			}
 		}
-		// if(j<n)
-		// {
-			// temp = temp -> next;
-		// }
 	}
 }
 
 int middle()
 {
-	// int n = (countNodes()+1)/2;
-	// struct Node *temp = start;
-	// for(int i = 1; i<n; i++)
-		// temp = temp -> next;
-	// return temp -> data;
-	return 0;
+	int n = (countNodes()+1)/2;
+	return getNode(n) -> data;
 }
