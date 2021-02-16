@@ -25,6 +25,7 @@ void bubbleSort();
 void swapData(struct Node*, struct Node*);
 void showRev(struct Node*);
 bool checkPallindrome();
+int countOccurence(int x);
 struct Node *start = NULL;
 int main()
 {
@@ -52,6 +53,7 @@ int main()
 		printf("15. Traverse In Reverse Order\n");
 		printf("16. Bubble Sort \n");
 		printf("17. Check Pallindrome\n");
+		printf("18. Count Occurence of Specific Data\n");
 		printf("Enter Your Choice : ");
 		scanf("%d",&c);
 		switch(c)
@@ -134,12 +136,17 @@ int main()
 				if(checkPallindrome())printf("The List is Pallindrome\n");
 				else printf("The List is not Pallindrome\n");
 				break;
+			case 18:
+				printf("Enter Data : ");
+				scanf("%d",&data);
+				printf("Occurence of %d in list is : %d\n",data,countOccurence(data));
+				break;
 		}
 	}
 	return 0;
 }
 void showAll()
-{
+{	
 	struct Node *temp = start;
 	while(temp!=NULL)
 	{
@@ -441,5 +448,17 @@ bool checkPallindrome()
 		if(s1 -> data != b1 -> data) return false;
 	}
 	return true;
+}
+
+int countOccurence(int x)
+{
+	int i = 0;
+	struct Node *temp = start;
+	while(temp!=NULL)
+	{
+		if(temp->data == x) i++;
+		temp = temp -> next;
+	}
+	return i;
 }
 
