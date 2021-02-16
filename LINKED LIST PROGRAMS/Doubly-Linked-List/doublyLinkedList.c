@@ -22,6 +22,10 @@ void showAllRev();
 void bubbleSort();
 void swapData(struct Node *a, struct Node *b);
 void removeDupliSorted();
+void removeDupliUnSorted();
+
+struct Node* getNode(int p);
+
 
 struct Node *start = NULL;
 
@@ -46,6 +50,7 @@ int main()
 		printf("15. Traverse In Reverse Order\n");
 		printf("16. Bubble Sort \n");
 		printf("20. Sort and Remove Duplicate data\n");
+		printf("21. Remove Duplicate data Without Sorting\n");
 
 		printf("Enter Your Choice : ");
 		scanf("%d",&c);
@@ -102,6 +107,9 @@ int main()
 				break;
 			case 20:
 				removeDupliSorted();
+				break;
+			case 21:
+				removeDupliUnSorted();
 				break;
 		}
 	}
@@ -349,4 +357,43 @@ void swapData(struct Node *a, struct Node *b)
 	int t = a->data;
 	a->data = b->data;
 	b->data = t;	
+}
+
+void removeDupliUnSorted()
+{
+	int n = countNodes();
+	printf("%d\n",n);
+	if(start == NULL || start -> next == NULL) return;
+	struct Node *temp ;
+	struct Node *temp2 ;
+	for(int j = 1; j < n; j++)	
+	{
+		temp = getNode(j);
+		temp2 = getNode(j);
+		for(int i = j; i < n;)
+		{
+			if(temp2 -> next -> data == temp -> data) 
+			{
+				deleteAtSPos(i+1);
+				n--;
+			}
+			else
+			{
+				temp2 = temp2-> next; 
+				i++;
+			}
+		}
+	}
+}
+
+struct Node* getNode(int p)
+{
+	int n = countNodes();
+	if(p>n) return NULL;
+	struct Node *temp = start;
+	for(int i = 1 ; i < p; i++)
+	{
+		temp = temp -> next;
+	}
+	return temp;
 }
