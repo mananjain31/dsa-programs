@@ -417,7 +417,6 @@ void swapData(struct Node *a, struct Node *b)
 	b->data = t;	
 }
 
-
 bool checkPallindrome()
 {
 	if(start == NULL) return false;
@@ -443,3 +442,4 @@ bool checkPallindrome()
 	}
 	return true;
 }
+
