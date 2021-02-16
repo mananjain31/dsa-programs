@@ -26,6 +26,10 @@ void swapData(struct Node*, struct Node*);
 void showRev(struct Node*);
 bool checkPallindrome();
 int countOccurence(int x);
+void removeDupliSorted();
+void removeDupliSorted();
+struct Node* getNode(int p);
+int middle();
 struct Node *start = NULL;
 int main()
 {
@@ -54,6 +58,10 @@ int main()
 		printf("16. Bubble Sort \n");
 		printf("17. Check Pallindrome\n");
 		printf("18. Count Occurence of Specific Data\n");
+		printf("19. get Nth Node\n");
+		printf("20.	Sort and Remove Duplicate data\n");
+		printf("21. Remove Duplicate data Without Sorting\n");
+		printf("22. Print Middle Element\n");
 		printf("Enter Your Choice : ");
 		scanf("%d",&c);
 		switch(c)
@@ -140,6 +148,27 @@ int main()
 				printf("Enter Data : ");
 				scanf("%d",&data);
 				printf("Occurence of %d in list is : %d\n",data,countOccurence(data));
+				break;
+			case 19:
+				printf("Enter Position : ");
+				scanf("%d",&pos);
+				struct Node *nthNode = getNode(pos);
+				if(nthNode == NULL) 
+				{
+					printf("Node not Found\n");
+				}
+				else
+				{
+					printf("Node Found with data = %d\n", nthNode -> data);
+					printf("Address = %u\n", nthNode );
+				}
+				break;
+			case 20:
+				removeDupliSorted();
+				break;
+			case 22:
+				if(countNodes()>1)
+				printf("middle element is : %d\n", middle());
 				break;
 		}
 	}
@@ -462,3 +491,57 @@ int countOccurence(int x)
 	return i;
 }
 
+struct Node* getNode(int p)
+{
+	int n = countNodes();
+	if(p>n) return NULL;
+	struct Node *temp = start;
+	for(int i = 1 ; i < p; i++)
+	{
+		temp = temp -> next;
+	}
+	return temp;
+}
+
+void removeDupliSorted()
+{
+	bubbleSort();
+	int n = countNodes();
+	printf("%d\n",n);
+	if(start == NULL || start -> next == NULL) return;
+	struct Node *temp = start;
+	for(int i = 1; i < n; i++)
+	{
+		if(temp->data == temp->next->data)
+			deleteAtSPos(i+1);
+		showAll();
+		n--;
+		if(temp->data != temp->next->data) temp = temp -> next;
+	}
+}
+
+void removeDupliSorted()
+{
+	bubbleSort();
+	int n = countNodes();
+	printf("%d\n",n);
+	if(start == NULL || start -> next == NULL) return;
+	struct Node *temp = start;
+	for(int i = 1; i < n; i++)
+	{
+		if(temp->data == temp->next->data)
+			deleteAtSPos(i+1);
+		showAll();
+		n--;
+		if(temp->data != temp->next->data) temp = temp -> next;
+	}
+}
+
+int middle()
+{
+	int n = (countNodes()+1)/2;
+	struct Node *temp = start;
+	for(int i = 1; i<n; i++)
+		temp = temp -> next;
+	return temp -> data;
+}
