@@ -30,10 +30,13 @@ void removeDupliSorted();
 void removeDupliUnSorted();
 struct Node* getNode(int p);
 int middle();
+void lastToFirst();
+// void swapNodes(int a, int b);
+
 struct Node *start = NULL;
 int main()
 {
-	int data, data2, pos, c=-1;
+	int data, data2, pos, pos2, c=-1;
 	while(c)
 	{
 		//MAIN LINKED LIST CODE :
@@ -62,6 +65,8 @@ int main()
 		printf("20. Sort and Remove Duplicate data\n");
 		printf("21. Remove Duplicate data Without Sorting\n");
 		printf("22. Get Middle Element\n");
+		printf("23. Move Last element to Beginning\n");
+		// printf("23. Swap Two Nodes\n");
 		printf("Enter Your Choice : ");
 		scanf("%d",&c);
 		switch(c)
@@ -175,6 +180,15 @@ int main()
 				else
 					printf("Empty list\n");
 				break;
+			case 23:
+				lastToFirst();
+				break;
+				// printf("1st Data to swap : ");
+				// scanf("%d",&data);
+				// printf("2nd Data to swap : ");
+				// scanf("%d",&data2);
+				// swapNodes(data, data2);
+				// break;
 		}
 	}
 	return 0;
@@ -562,4 +576,48 @@ int middle()
 {
 	int n = (countNodes()+1)/2;
 	return getNode(n) -> data;
+}
+
+// void swapNodes(int a, int b)
+// {
+	// if(a == b) return;
+	// struct Node* pre1=NULL;
+	// struct Node* pre2=NULL;
+	// struct Node* t1=NULL;
+	// struct Node* t2=NULL;
+	// while(t1 != NULL && t1->data != a)
+	// {
+		// pre1 = t1;
+		// t1 = t1->next;
+	// }
+	// while(t2 != NULL && t2->data != b)
+	// {
+		// pre2 = t2;
+		// t2 = t2->next;
+	// }
+	// if(t1 == NULL || t2 == NULL) return;
+	// if (pre1 != NULL) 
+       // pre1->next = t2;
+	// else start = t2;
+	// if (pre2 != NULL) 
+       // pre2->next = t1;
+	// else start = t1;
+	// printf("here\n");
+	// struct Node *temp = t2->next; 
+	// t2->next = t1->next; 
+	// t1->next  = temp; 	
+// }
+
+void lastToFirst()
+{
+	if(start == NULL)
+		return;
+	if(start->next == NULL)
+		return;
+	struct Node* temp = start;
+	while(temp->next->next != NULL)
+		temp = temp -> next;
+	temp->next->next = start;
+	start = temp->next;
+	temp -> next = NULL;
 }
