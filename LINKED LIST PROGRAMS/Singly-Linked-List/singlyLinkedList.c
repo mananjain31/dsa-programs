@@ -131,8 +131,8 @@ int main()
 				bubbleSort();
 				break;
 			case 17:;
-				if(checkPallindrome())printf("The List is Pallindrome");
-				else printf("The List is not Pallindrome");
+				if(checkPallindrome())printf("The List is Pallindrome\n");
+				else printf("The List is not Pallindrome\n");
 				break;
 		}
 	}
