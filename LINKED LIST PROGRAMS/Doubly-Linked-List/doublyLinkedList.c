@@ -23,6 +23,7 @@ void bubbleSort();
 void swapData(struct Node *a, struct Node *b);
 void removeDupliSorted();
 void removeDupliUnSorted();
+void reverseList();
 
 struct Node* getNode(int p);
 
@@ -32,6 +33,7 @@ struct Node *start = NULL;
 int main()
 {
 	int data, data2, pos, pos2, c=-1;
+	struct Node *temp;
 	while(c)
 	{
 		//MAIN LINKED LIST CODE :
@@ -47,10 +49,12 @@ int main()
 		printf("8. Delete At Beginning\n");
 		printf("9. Delete At Ending\n");
 		printf("10. Delete At Specific Position\n");
+		printf("14. Reverse List\n");
 		printf("15. Traverse In Reverse Order\n");
 		printf("16. Bubble Sort \n");
 		printf("20. Sort and Remove Duplicate data\n");
 		printf("21. Remove Duplicate data Without Sorting\n");
+		printf("25. Find Largest Node\n");
 
 		printf("Enter Your Choice : ");
 		scanf("%d",&c);
@@ -98,6 +102,9 @@ int main()
 				printf("Enter Position : ");
 				scanf("%d",&pos);
 				deleteAtSPos(pos);
+				break;
+			case 14:
+				reverseList();
 				break;
 			case 15:
 				showAllRev();
@@ -396,4 +403,21 @@ struct Node* getNode(int p)
 		temp = temp -> next;
 	}
 	return temp;
+}
+
+void reverseList()
+{
+	if(start == NULL) return;
+	if(start ->next == NULL) return;
+	struct Node *temp = start;
+	struct Node *t;
+	do
+	{
+		t = temp->next;
+		temp->next = temp->prev;
+		temp->prev = t;
+		printf("%d ",temp->data);
+		start = temp;
+		temp = temp -> prev;
+	}while(temp != NULL);
 }
