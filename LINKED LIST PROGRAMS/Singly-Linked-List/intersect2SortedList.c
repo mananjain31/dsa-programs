@@ -66,7 +66,7 @@ struct Node* intersect(struct Node *start1, struct Node *start2)
 		}
 		t1 = t1->next; 		
 	}
-	return start3->next;
+	return start3->next; 
 }
 struct Node* mergeSortedLists(struct Node *start1, struct Node *start2)
 {
