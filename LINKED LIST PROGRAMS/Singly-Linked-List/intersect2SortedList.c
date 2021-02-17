@@ -26,7 +26,49 @@ void showAll(struct Node *start)
 	printf("\n");
 }
 
+struct Node* createNode()
+{
+	return (struct Node*)malloc(sizeof(struct Node*));
+}
+
 struct Node* intersect(struct Node *start1, struct Node *start2)
+{
+	struct Node* t1;
+	struct Node* t2;
+	if(start1 == NULL || start2 == NULL) return NULL;
+	if(start1 -> data > start2 -> data)
+	{
+		t1 = start1;
+		t2 = start2;
+	}
+	else
+	{
+		t1 = start2;
+		t2 = start1;
+	}
+	struct Node* t3 = createNode();
+	struct Node* s3;
+	t3->next = NULL;
+	start3 = t3;
+	while(t1 != NULL)
+	{
+		while(t2 != NULL && t1 != NULL && t2->data <= t1->data)
+		{
+			if(t2->data == t1->data)
+			{
+				t3->next = createNode();
+				t3 = t3->next;
+				t3->data = t1->data;
+				printf("%d ",t3->data);
+				t3->next = NULL;
+			}
+			t2 = t2->next;
+		}
+		t1 = t1->next; 		
+	}
+	return start3->next;
+}
+struct Node* mergeSortedLists(struct Node *start1, struct Node *start2)
 {
 	struct Node *start3 = (struct Node*)malloc(sizeof(struct Node));
 	if(start1 == NULL ) return start2;
@@ -86,15 +128,17 @@ int main()
 	struct Node *start1 = NULL;
 	struct Node *start2 = NULL;
 	struct Node *start3 = NULL;
-	start1 = insertAtB(40, start1);
+	start1 = insertAtB(99, start1);
+	start1 = insertAtB(35, start1);
 	start1 = insertAtB(30, start1);
 	start1 = insertAtB(20, start1);
-	start1 = insertAtB(10, start1);
+	start1 = insertAtB(5, start1);
 	
 	start2 = insertAtB(99, start2);
-	start2 = insertAtB(66, start2);
-	start2 = insertAtB(55, start2);
-	start2 = insertAtB(11, start2);
+	start2 = insertAtB(99, start2);
+	start2 = insertAtB(30, start2);
+	start2 = insertAtB(12, start2);
+	start2 = insertAtB(10, start2);
 	
 	start3 = intersect(start1, start2);
 	showAll(start1);
