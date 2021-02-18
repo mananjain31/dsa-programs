@@ -10,7 +10,7 @@ struct Node
 void insertAtB(int x);
 void deleteAtB();
 void insertAtEnd(int x);
-void deleteAtEnd();
+void deleteAtE();
 void insertAtSPos(int x, int p);
 void deleteAtSPos(int p);
 void insertAfterSData(int x, int x2);
@@ -61,7 +61,7 @@ int main()
 			case 3:
 				printf("Enter Data : ");
 				scanf("%d",&data);
-				insertAtEnd(data);
+				insertAtE(data);
 				break;
 			case 4:
 				printf("Enter Data : ");
@@ -88,3 +88,63 @@ int main()
 	}
 }
 
+void insertAtB(int x)
+{
+	struct Node* temp = createNode();
+	temp->data = x;
+	if(start == NULL)
+	{
+		start = end = temp->next = temp->prev = temp;
+		return;
+	}
+	temp->next = start;
+	temp->prev = end;
+	start->prev = temp;
+	start = end->next = temp;
+}
+
+void showAll()
+{
+	struct Node* temp = start;
+	if(temp == NULL)
+	{
+		printf("List is empty\n");
+		return;
+	}
+	do{
+		printf("%d ",temp->data);
+		temp = temp->next;
+	}while(temp != start);
+		
+}
+
+void insertAtE(int x)
+{
+	if(start == NULL)
+	{
+		insertAtB(x);
+		return;
+	}
+	struct Node* temp = createNode();
+	temp -> data = x;
+	temp -> next =start;
+	temp -> prev = end;
+	end -> next = temp;
+	start -> prev = temp;
+	end = temp;
+	
+}
+
+void showAllRev()
+{
+	struct Node* temp = end;
+	if(temp == NULL)
+	{
+		printf("List is empty\n");
+		return;
+	}
+	do{
+		printf("%d ", temp->data);
+		temp = temp->prev;		
+	}while(temp != end);
+}
