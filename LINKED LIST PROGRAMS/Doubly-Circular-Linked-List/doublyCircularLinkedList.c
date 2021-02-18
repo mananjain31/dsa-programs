@@ -10,7 +10,7 @@ struct Node
 void insertAtB(int x);
 void deleteAtB();
 void insertAtE(int x);
-// void deleteAtEnd();
+void deleteAtE();
 void insertAtSPos(int x, int p);
 void deleteAtSPos(int p);
 // void insertAfterSData(int x, int x2);
@@ -41,8 +41,8 @@ int main()
 		printf("2. Insert At Beginning\n");
 		printf("3. Insert At Ending\n");
 		printf("4. Insert Node at Specific Position \n");
-		// printf("5. Delete At Beginning\n");
-		// printf("6. Delete At Ending\n");
+		printf("5. Delete At Beginning\n");
+		printf("6. Delete At Ending\n");
 		// printf("7. Delete At Specific Position\n");
 		printf("8. Traverse In Reverse Order\n");
 		printf("Enter Your Choice : ");
@@ -71,12 +71,12 @@ int main()
 				scanf("%d",&pos);
 				insertAtSPos(data,pos);
 				break;
-			// case 5:
-				// deleteAtB();
-				// break;
-			// case 6:
-				// deleteAtEnd();
-				// break;
+			case 5:
+				deleteAtB();
+				break;
+			case 6:
+				deleteAtE();
+				break;
 			// case 7:
 				// printf("Enter Position : ");
 				// scanf("%d",&pos);
@@ -197,4 +197,34 @@ void insertAtSPos(int x, int p)
 	}
 }
 
+void deleteAtB()
+{
+	if(start == NULL)return;
+	if(start == end)
+	{
+		free(start);
+		end = start = NULL;
+		return;
+	}
+	struct Node* temp = start;
+	start = start->next;
+	start->prev = end;
+	end->next = start;
+	free(temp);
+}
 
+void deleteAtE()
+{
+	if(start == NULL)return;
+	if(start == end)
+	{
+		free(start);
+		end = start = NULL;
+		return;
+	}
+	struct Node* temp = end;
+	end = end->prev;
+	end->next = start;
+	start->prev = end;
+	free(temp);
+}
