@@ -24,6 +24,7 @@ void swapData(struct Node *a, struct Node *b);
 void removeDupliSorted();
 void removeDupliUnSorted();
 void reverseList();
+void insertionSort();
 
 struct Node* getNode(int p);
 
@@ -55,6 +56,7 @@ int main()
 		printf("20. Sort and Remove Duplicate data\n");
 		printf("21. Remove Duplicate data Without Sorting\n");
 		printf("25. Find Largest Node\n");
+		printf("26.Insertion Sort\n");
 
 		printf("Enter Your Choice : ");
 		scanf("%d",&c);
@@ -117,6 +119,9 @@ int main()
 				break;
 			case 21:
 				removeDupliUnSorted();
+				break;
+			case 26:
+				insertionSort();
 				break;
 		}
 	}
@@ -420,4 +425,29 @@ void reverseList()
 		start = temp;
 		temp = temp -> prev;
 	}while(temp != NULL);
+}
+
+
+void insertionSort()
+{
+	if(start == NULL)
+		return;
+	if(start->next==NULL)
+	{
+		return;
+	}
+	struct Node* temp = start;
+	struct Node* temp2;
+	while(temp->next != NULL)
+	{
+		temp2 = temp->next;
+		int x = temp2->data;
+		while(temp2->prev!=NULL && (temp2->prev->data > x ))
+		{
+			temp2->data = temp2->prev->data;
+			temp2 = temp2->prev;
+		}
+		temp2->data = x;
+		temp = temp->next;
+	}
 }
