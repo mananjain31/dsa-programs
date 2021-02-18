@@ -71,6 +71,7 @@ int main()
 		printf("22. Get Middle Element\n");
 		printf("23. Move Last element to Beginning\n");
 		printf("24. Store data in sorted Order\n");
+		// printf("25. Quick Sort\n");
 		// printf("23. Swap Two Nodes\n");
 		printf("Enter Your Choice : ");
 		scanf("%d",&c);
@@ -193,6 +194,9 @@ int main()
 				scanf("%d",&data);
 				sortNstore(data);
 				break;
+			// case 25:
+				// quickSort();
+				// break;
 		}
 	}
 	return 0;
@@ -665,30 +669,25 @@ void sortNstore(int x)
 // void showQuickSort(int b, int e)
 // {
 	// if(b==e || b>e) return;
+	// if(getNode(b)==NULL || getNode(e)==NULL) return;
 	// int i=b,j=e;
 	// int p = b;
-	// int pivot = getNode(b)->data;
-	// i++;
+	// int pivot = getNode(e)->data;
 	// while(i<j)
 	// {
-		// while(getNode(i)->data > pivot && i<j)
+		// while(getNode(i)->data < pivot && i<j)
 		// {
-			// swapData(getNode(i),getNode(j));
-			// showAll();
-			// j--;
-		// }
-		// i++;
-		// while(getNode(j)->data < pivot  && i<j)
-		// {
-			// swapData(getNode(i),getNode(j));
-			// showAll();
 			// i++;
 		// }
-		// j--;
+		// while(getNode(j)->data > pivot  && i<j)
+		// {
+			// j--;
+		// }
+		// if(i<j)
+			// swapData(getNode(i),getNode(j));
 	// }
 	// swapData(getNode(p),getNode(j));
 	// showAll();
-	// printf("out\n");
 	// showQuickSort(b,j);
 	// showQuickSort(j,e);
 // }

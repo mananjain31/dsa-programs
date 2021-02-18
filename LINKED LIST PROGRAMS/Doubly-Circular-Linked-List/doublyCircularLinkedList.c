@@ -14,7 +14,7 @@ void deleteAtE();
 void insertAtSPos(int x, int p);
 void deleteAtSPos(int p);
 // void insertAfterSData(int x, int x2);
-// void deleteAtSData(int x);
+void deleteAtSData(int x);
 void showAll();
 // int searchData(int x);
 void showAllRev();
@@ -43,8 +43,9 @@ int main()
 		printf("4. Insert Node at Specific Position \n");
 		printf("5. Delete At Beginning\n");
 		printf("6. Delete At Ending\n");
-		// printf("7. Delete At Specific Position\n");
-		printf("8. Traverse In Reverse Order\n");
+		printf("7. Delete At Specific Position\n");
+		printf("8. Delete At Specific Data\n");
+		printf("9. Traverse In Reverse Order\n");
 		printf("Enter Your Choice : ");
 		scanf("%d",&c);
 		switch(c)
@@ -77,12 +78,17 @@ int main()
 			case 6:
 				deleteAtE();
 				break;
-			// case 7:
-				// printf("Enter Position : ");
-				// scanf("%d",&pos);
-				// deleteAtSPos(pos);
-				// break;
+			case 7:
+				printf("Enter Position : ");
+				scanf("%d",&pos);
+				deleteAtSPos(pos);
+				break;
 			case 8:
+				printf("Enter Data : ");
+				scanf("%d",&data);
+				deleteAtSData(data);
+				break;
+			case 9:
 				showAllRev();
 				break;
 		}
@@ -174,7 +180,7 @@ void insertAtSPos(int x, int p)
 	int n = countNodes();
 	struct Node* temp = createNode();
 	struct Node* temp2 = start;
-	if(p<=n)
+	if(p>1 && p<=n)
 	{
 		for(int i = 2; i<p; i++)
 		{
@@ -227,4 +233,54 @@ void deleteAtE()
 	end->next = start;
 	start->prev = end;
 	free(temp);
+}
+
+void deleteAtSPos(int p)
+{
+	if(p == 1)
+	{
+		deleteAtB();
+		return;
+	}
+	int n = countNodes();
+	struct Node* temp = start;
+	struct Node* temp2;
+	if(p>1 && p<n)
+	{
+		for(int i = 2; i<p; i++)
+		{
+			temp = temp->next;
+		}
+		temp2 = temp->next;
+		temp2->next->prev = temp;
+		temp->next = temp2->next;
+		free(temp2);
+	}
+	else if(p == n)
+	{
+		deleteAtE();
+	}
+	else
+	{
+		printf("Invalid Position\n");
+	}
+}
+
+void deleteAtSData(int x)
+{
+	if(start == NULL)return;
+	else
+	{
+		struct Node* temp = start;
+		int i = 1;
+		do{
+			if(x == temp->data)
+			{
+				deleteAtSPos(i);
+				return;
+			}
+			i++;
+			temp = temp->next;
+		}while(temp != start);
+	}		
 }
