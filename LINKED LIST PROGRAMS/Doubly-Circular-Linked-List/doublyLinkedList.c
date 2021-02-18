@@ -9,18 +9,19 @@ struct Node
 };
 void insertAtB(int x);
 void deleteAtB();
-void insertAtEnd(int x);
-void deleteAtE();
+void insertAtE(int x);
+// void deleteAtEnd();
 void insertAtSPos(int x, int p);
 void deleteAtSPos(int p);
-void insertAfterSData(int x, int x2);
-void deleteAtSData(int x);
+// void insertAfterSData(int x, int x2);
+// void deleteAtSData(int x);
 void showAll();
-int searchData(int x);
+// int searchData(int x);
 void showAllRev();
+int countNodes();
 struct Node* createNode()
 {
-	return (struct Node*)maollc(sizeof(struct Node));
+	return (struct Node*)malloc(sizeof(struct Node));
 }
 
 struct Node *start = NULL;
@@ -40,9 +41,9 @@ int main()
 		printf("2. Insert At Beginning\n");
 		printf("3. Insert At Ending\n");
 		printf("4. Insert Node at Specific Position \n");
-		printf("5. Delete At Beginning\n");
-		printf("6. Delete At Ending\n");
-		printf("7. Delete At Specific Position\n");
+		// printf("5. Delete At Beginning\n");
+		// printf("6. Delete At Ending\n");
+		// printf("7. Delete At Specific Position\n");
 		printf("8. Traverse In Reverse Order\n");
 		printf("Enter Your Choice : ");
 		scanf("%d",&c);
@@ -70,17 +71,17 @@ int main()
 				scanf("%d",&pos);
 				insertAtSPos(data,pos);
 				break;
-			case 5:
-				deleteAtB();
-				break;
-			case 6:
-				deleteAtEnd();
-				break;
-			case 7:
-				printf("Enter Position : ");
-				scanf("%d",&pos);
-				deleteAtSPos(pos);
-				break;
+			// case 5:
+				// deleteAtB();
+				// break;
+			// case 6:
+				// deleteAtEnd();
+				// break;
+			// case 7:
+				// printf("Enter Position : ");
+				// scanf("%d",&pos);
+				// deleteAtSPos(pos);
+				// break;
 			case 8:
 				showAllRev();
 				break;
@@ -115,7 +116,7 @@ void showAll()
 		printf("%d ",temp->data);
 		temp = temp->next;
 	}while(temp != start);
-		
+	printf("\n");
 }
 
 void insertAtE(int x)
@@ -147,4 +148,53 @@ void showAllRev()
 		printf("%d ", temp->data);
 		temp = temp->prev;		
 	}while(temp != end);
+	printf("\n");
 }
+
+int countNodes()
+{
+	if(start == NULL)
+		return 0;
+	struct Node* temp = start;
+	int i = 0;
+	do
+	{
+		i++;
+		temp = temp->next;
+	}while(temp!=start);
+	return i;
+}
+void insertAtSPos(int x, int p)
+{
+	if(p == 1)
+	{
+		insertAtB(x);
+		return;
+	}
+	int n = countNodes();
+	struct Node* temp = createNode();
+	struct Node* temp2 = start;
+	if(p<=n)
+	{
+		for(int i = 2; i<p; i++)
+		{
+			temp2 = temp2->next;
+		}
+		temp->data = x;
+		temp->next = temp2->next;
+		temp->prev = temp2;
+		
+		temp2->next->prev = temp;
+		temp2->next = temp;
+	}
+	else if(p == n+1)
+	{
+		insertAtE(x);
+	}
+	else
+	{
+		printf("Invalid Position\n");
+	}
+}
+
+
