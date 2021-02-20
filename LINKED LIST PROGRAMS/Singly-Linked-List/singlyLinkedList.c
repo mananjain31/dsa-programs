@@ -201,6 +201,36 @@ int main()
 	}
 	return 0;
 }
+
+void bubbleSort()
+{
+	int j,i;
+	struct Node* temp1 = start;
+	struct Node* temp2;
+	struct Node* temp3;
+	struct Node* t;
+	int n = countNodes();
+	for(i=1;i<n;i++,temp1=start)		
+	{
+		for(j=1;j<=n-i;j++,temp3 = temp1, temp1 = temp1->next)
+		{
+			temp2 = temp1->next;
+			if(temp1->data < temp2->data) continue;
+			temp1->next = temp2->next;
+			temp2->next = temp1;
+			if(temp1 == start)
+				start  = temp2;
+			else
+				temp3->next = temp2;
+			t = temp1;
+			temp1 = temp2;
+			temp2 = t;
+		}
+	}
+}
+
+
+
 void showAll()
 {	
 	struct Node *temp = start;
@@ -452,26 +482,6 @@ void showRev(struct Node* temp)
 	printf("%d ", temp -> data);
 }
 
-void bubbleSort()
-{
-	if(start == NULL || start->next == NULL) return;
-	struct Node *temp = start;
-	int n = countNodes();
-	showAll();
-	for(int i = 1; i < n ; i++)
-	{
-		temp = start;
-		for(int j = i; j < n; j++)
-		{	
-			if(temp->data > temp->next->data)
-			{
-				swapData(temp, temp->next);
-			}
-			temp = temp -> next;
-		}
-		showAll();
-	}
-}
 
 void swapData(struct Node *a, struct Node *b)
 {
@@ -690,4 +700,26 @@ void sortNstore(int x)
 	// showAll();
 	// showQuickSort(b,j);
 	// showQuickSort(j,e);
+// }
+
+
+// void bubbleSort()
+// {
+	// if(start == NULL || start->next == NULL) return;
+	// struct Node *temp = start;
+	// int n = countNodes();
+	// showAll();
+	// for(int i = 1; i < n ; i++)
+	// {
+		// temp = start;
+		// for(int j = i; j < n; j++)
+		// {	
+			// if(temp->data > temp->next->data)
+			// {
+				// swapData(temp, temp->next);
+			// }
+			// temp = temp -> next;
+		// }
+		// showAll();
+	// }
 // }
