@@ -210,9 +210,10 @@ void bubbleSort()
 	struct Node* temp3;
 	struct Node* t;
 	struct Node* i;
-	for(i=NULL;start->next!=i;i=temp2,temp1=start)		
+	for(i=NULL;start->next!=i;i=temp2)		
 	{
-		for(;temp1->next!=NULL;temp3 = temp1, temp1 = temp1->next)
+		temp1=start;
+		for(;temp1->next!=i;temp3 = temp1, temp1 = temp1->next)
 		{
 			temp2 = temp1->next;
 			if(temp1->data < temp2->data) continue;
