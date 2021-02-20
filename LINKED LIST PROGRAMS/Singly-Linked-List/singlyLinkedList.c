@@ -204,15 +204,15 @@ int main()
 
 void bubbleSort()
 {
-	int j,i;
+	if(start == NULL) return;
 	struct Node* temp1 = start;
 	struct Node* temp2;
 	struct Node* temp3;
 	struct Node* t;
-	int n = countNodes();
-	for(i=1;i<n;i++,temp1=start)		
+	struct Node* i;
+	for(i=NULL;start->next!=i;i=temp2,temp1=start)		
 	{
-		for(j=1;j<=n-i;j++,temp3 = temp1, temp1 = temp1->next)
+		for(;temp1->next!=NULL;temp3 = temp1, temp1 = temp1->next)
 		{
 			temp2 = temp1->next;
 			if(temp1->data < temp2->data) continue;
