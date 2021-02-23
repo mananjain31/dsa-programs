@@ -30,10 +30,6 @@ void main ()
 					output[k++] = pop();
 				pop();
 			}
-			else
-			{
-				
-			} 
 		}
 		else 
 		{
