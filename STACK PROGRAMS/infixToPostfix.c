@@ -1,28 +1,57 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
-char stack[1000];
+#define CAPACITY 1000
+char stack[CAPACITY];
 char pop();
 char peek();
-void push();
+void push(char);
 bool empty();
+int top = -1;
 
 void main()
 {
 	int i, k = 0;
-	char input[1000];
-	char output[1000];
+	char input[CAPACITY];
+	char output[CAPACITY];
 	printf("Enter Expression : ");
 	scanf("%s",input);
 	for(i = 0; input[i] != '\0'; i++)
 	{
 		if(input[i] >= 'A' && input[i] <= 'Z')
-		{
 			output[k++] = input[i];
-		}
 		else 
 		{
-			//will be continued
+			if(input[i] == '(') push(input[i]);
+			else if(input[i] == ')')
+			{
+				while(peek() != '(')
+					output[k++] = pop();
+				pop();
+			}
+			else push(input[i]);
 		}
 	}
+	output[k] = '\0';
+	printf("%s", output);
+}
+
+void push(char x)
+{
+	stack[++top] = x;
+}
+
+char pop()
+{
+	return stack[top--];
+}
+
+char peek()
+{
+	return stack[top];
+}
+
+bool empty()
+{
+	return (top == -1 ? true : false);
 }
