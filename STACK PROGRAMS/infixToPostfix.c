@@ -33,14 +33,15 @@ void main ()
 		}
 		else 
 		{
-			while (priority(input[i]) <= priority(peek()) && peek() != '(')
+			while (priority(input[i]) <= priority(peek()))
 			{
 				output[k++] = pop();
 			}
 			push(input[i]);
 		}
-
 	}
+	while(!empty())
+		output[k++] = pop();
 	output[k] = '\0';
 	printf("%s", output);
 }
@@ -67,7 +68,13 @@ bool empty()
 
 int priority(char x)
 {
-	if(x == '+' || x == '-')return 1;
-	if(x == '*' || x == '/')return 2;
-	if(x == '^')return 3;
+	switch(x)
+	{
+		case '(':return 1;
+		case '+':
+		case '-':return 2;
+		case '*':
+		case '/':return 3;
+		case '^':return 4;
+	}
 }
