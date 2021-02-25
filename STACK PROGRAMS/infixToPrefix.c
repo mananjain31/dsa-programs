@@ -89,7 +89,11 @@ void rev(char* input)
 	int i=0,j=0;
 	char t;
 	while(input[j]!='\0')
+	{
+		if(input[j]=='(')input[j] = ')';
+		else if(input[j]==')')input[j] = '(';
 		j++;
+	}
 	j--;
 	while(i<j)
 	{
