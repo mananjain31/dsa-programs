@@ -49,9 +49,7 @@ void enqueue()
 	int x;
 	printf("Enter Any Data : ");
 	scanf("%d", &x);
-	printf("hello\n");
 	temp->data = x;
-	printf("hello\n");
 	if(rear == NULL)
 	{
 		rear = temp;
