@@ -40,3 +40,52 @@ int main()
 	return 0;
 }
 
+void enqueue()
+{
+	if((rear+1) % MAX == front)
+	{
+			printf("Queue overflow\n");
+			return;
+	}
+	else if(front == -1)
+	{
+		front = 0;
+	}
+	rear = (rear+1) % MAX;
+	int data;
+	printf("Enter Data : ");
+	scanf("%d", &data);
+	queue[rear] = data;
+}
+
+void dequeue()
+{
+	if(front == -1)
+	{
+		printf("Queue empty\n");
+	}
+	else if(front == rear)
+	{
+		front = rear = -1;
+	}
+	else
+	{
+		front = (front+1) % MAX;
+	}
+}
+
+void showAll()
+{
+	if(front == -1)
+	{
+		printf("Queue empty\n");
+	}
+	else
+	{
+		for (int i = front; i != rear; i = (i+1) % MAX)
+		{
+			printf("%d ",queue[i]);
+		}
+		printf("%d \n",queue[rear]);
+	}
+}
