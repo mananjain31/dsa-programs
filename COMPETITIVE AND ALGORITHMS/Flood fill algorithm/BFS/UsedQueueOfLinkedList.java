@@ -16,11 +16,11 @@ public class UsedQueueOfLinkedList
 		for (int i=0; i<a.length; i++)
 			for (int j=0; j<a[0].length; j++)
 				a[i][j] = ' ';
-		FillColor<Character> f = new FillColor<Character>();
+		FloodFill<Character> f = new FloodFill<Character>();
 		f.execute (a, 6, 6, 'X');
 	}
 }
-class FillColor<T>
+class FloodFill<T>
 {
 	public void showArr(T a[][])
 	{
