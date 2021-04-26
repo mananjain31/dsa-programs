@@ -14,29 +14,41 @@ class trieImplementation
             System.out.println("1. Insert String");
             System.out.println("2. Delete String");
             System.out.println("3. Count occurence");
+            System.out.println("4. Update String");
             System.out.print("Enter Your Choice : ");
             choice = sc.nextInt();
             sc.nextLine();
-            switch(choice)
-            {
-                case 1:
-                    System.out.println("Enter String To Insert : ");
-                    s = sc.nextLine();
-                    trie.insert(s);
-                    System.out.println("Inserted " + s + " Succesfully");
-                    break;
-                case 2:
-                    System.out.println("Enter String To Delete : ");
-                    s = sc.nextLine();
-                    trie.delete(s);
-                    System.out.println("Deleted " + s + " Succesfully");
-                    break;
-                case 3:
-                    System.out.println("Enter String To Count Its Occurence : ");
-                    s = sc.nextLine();
-                    System.out.println("occurence of " + s + " in the trie is  => " + trie.count(s));
-                    break;
-            }
+            try{
+	            switch(choice)
+	            {
+	                case 1:
+	                    System.out.println("Enter String To Insert : ");
+	                    s = sc.nextLine();
+	                    trie.insert(s);
+	                    System.out.println("Inserted " + s + " Succesfully");
+	                    break;
+	                case 2:
+	                    System.out.println("Enter String To Delete : ");
+	                    s = sc.nextLine();
+	                    trie.delete(s);
+	                    System.out.println("Deleted " + s + " Succesfully");
+	                    break;
+	                case 3:
+	                    System.out.println("Enter String To Count Its Occurence : ");
+	                    s = sc.nextLine();
+	                    System.out.println("occurence of " + s + " in the trie is  => " + trie.count(s));
+	                    break;
+	                case 4:
+	                    System.out.println("Enter String to update its value :");
+	                    String oldStr = sc.nextLine();
+	                    System.out.println("Enter Updated String :");
+	                    String newStr = sc.nextLine();
+	                    trie.update(oldStr, newStr);
+	                    System.out.println("Updated " + oldStr + " to " + newStr + " Succesfully");
+	                    break;
+	            }
+	        }catch(Exception e) {System.out.println(e.getMessage());} 
+            System.out.println();
         }while(choice != 0);
     }
 }
@@ -88,12 +100,16 @@ class Trie
             throw new RuntimeException("String not found");
         curr.terminating--;
     }
+    void update(String oldStr, String newStr)
+    {
+        delete(oldStr);
+        insert(newStr);
+    }
 }
 
 class Node
 {
     Node nodes[] = new Node[26];
-    int children;
     int terminating;
     Node next(char c)
     {
@@ -102,6 +118,5 @@ class Node
     void create(char c)
     {
         nodes[c-'a'] = new Node();
-        children++;
     }
 }
