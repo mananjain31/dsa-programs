@@ -1,0 +1,70 @@
+import java.util.*;
+class trieImplementation
+{
+    public static void main(String[] args) {
+        Trie t = new Trie();  
+    }
+}
+class Trie
+{
+    Node root;
+
+    Trie()
+    {
+        root = new Node();
+    }
+
+    int count(String s)
+    {
+        Node curr = root;
+        for(int i=0; i<s.length(); i++)
+        {
+            char c = s.charAt(i);
+            curr = curr.next(c);
+            if(curr == null)
+                return 0;
+        }
+        return curr.terminating;
+    }
+
+    void insert(String s)
+    {
+        Node curr = root;
+        for(int i=0; i<s.length(); i++)
+        {
+            char c = s.charAt(i);
+            if(curr.next(c) == null)
+                curr.create(c);                
+            curr = curr.next(c);
+        }
+        curr.terminating++;
+    }
+    void delete(String s)
+    {
+        Node curr = root;
+        for(int i=0; i<s.length(); i++)
+        {
+            char c = s.charAt(i);
+            curr = curr.next(c);
+            if(curr == null)
+                return;
+        }
+        curr.terminating--;
+    }
+}
+
+class Node
+{
+    Node nodes[] = new Node[26];
+    int children;
+    int terminating;
+    Node next(char c)
+    {
+        return nodes[c-'a'];
+    }
+    void create(char c)
+    {
+        nodes[c-'a'] = new Node();
+        children++;
+    }
+}
