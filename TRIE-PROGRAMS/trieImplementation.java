@@ -110,13 +110,19 @@ class Trie
 class Node
 {
     Node nodes[] = new Node[26];
+    Node nodesC[] = new Node[26];
     int terminating;
     Node next(char c)
     {
+    	if(c >= 'A' && c <= 'Z')
+    		return nodesC[c-'A'];
         return nodes[c-'a'];
     }
     void create(char c)
     {
-        nodes[c-'a'] = new Node();
+    	if(c >= 'A' && c <= 'Z')
+    		nodesC[c-'A'] = new Node();
+    	else
+        	nodes[c-'a'] = new Node();
     }
 }
