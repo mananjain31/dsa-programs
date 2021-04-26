@@ -57,7 +57,9 @@ class trieImplementation
 	                	System.out.println("Please Enter Valid Choice");
 	                	break;
 	            }
-	        }catch(Exception e) {System.out.println(e.getMessage());} 
+	        }
+	        catch(ArrayIndexOutOfBoundsException e){System.out.println("Only Alphabetic String Accepted");}
+	        catch(Exception e) {System.out.println(e.getMessage());} 
             System.out.println();
         }while(choice != 0);
     }
@@ -135,7 +137,7 @@ class Trie
     		if(curr.nodes[i] != null)
     			// showAll(curr[i], s+(char)(i + (int)'a'));
     			showAll(curr.nodes[i], s, (char)('a' + i));
-    		
+
     		if(curr.nodesC[i] != null)
     			// showAll(curr[i], s+(char)(i + (int)'a'));
     			showAll(curr.nodesC[i], s, (char)('A' + i));
