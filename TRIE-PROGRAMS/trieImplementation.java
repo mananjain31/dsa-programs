@@ -15,12 +15,15 @@ class trieImplementation
             System.out.println("2. Delete String");
             System.out.println("3. Count occurence");
             System.out.println("4. Update String");
+            System.out.println("5. Show All Data");
             System.out.print("Enter Your Choice : ");
             choice = sc.nextInt();
             sc.nextLine();
             try{
 	            switch(choice)
 	            {
+	            	case 0:
+	            		break;
 	                case 1:
 	                    System.out.println("Enter String To Insert : ");
 	                    s = sc.nextLine();
@@ -46,6 +49,13 @@ class trieImplementation
 	                    trie.update(oldStr, newStr);
 	                    System.out.println("Updated " + oldStr + " to " + newStr + " Succesfully");
 	                    break;
+	                case 5:
+	                	System.out.println("Showing All data in the format : data => occurence");
+	                	trie.showAll();
+	                	break;
+	                default:
+	                	System.out.println("Please Enter Valid Choice");
+	                	break;
 	            }
 	        }catch(Exception e) {System.out.println(e.getMessage());} 
             System.out.println();
@@ -104,6 +114,34 @@ class Trie
     {
         delete(oldStr);
         insert(newStr);
+    }
+
+    void showAll()
+    {
+    	Stack<Character> s = new Stack<>();
+    	showAll(root, s, ' ');
+    }
+    void showAll(Node curr, Stack<Character> s, char c)
+    {
+    	if(curr != root) s.push(c);
+    	if(curr.terminating != 0)
+    	{	
+    		for(char i : s)
+    			System.out.print(i);
+			System.out.println(" => " + curr.terminating);
+    	}
+    	for(int i=0; i<26; i++)
+    	{
+    		if(curr.nodes[i] != null)
+    			// showAll(curr[i], s+(char)(i + (int)'a'));
+    			showAll(curr.nodes[i], s, (char)('a' + i));
+    		
+    		if(curr.nodesC[i] != null)
+    			// showAll(curr[i], s+(char)(i + (int)'a'));
+    			showAll(curr.nodesC[i], s, (char)('A' + i));
+    	}
+
+    	if(curr != root) s.pop();
     }
 }
 
