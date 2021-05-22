@@ -56,26 +56,34 @@ void quickSort(void *a, int cs, int es, int (*p2f)(void*, void*))
 }
 
 ///////////////////////////////
+struct student
+{
+	int id;
+	char name[20];	
+};
 int mycomparator(void* i, void* j)
 {
-	int* l = (int*)i;
-	int* r = (int*)j;
-	return *l - *r; ////////////may cause error
+	struct student* l = (struct student*)i;
+	struct student* r = (struct student*)j;
+	
+	return strcmp(l->name, r->name); ////////////may cause error
 }
 int main()
 {
 	int n;
-	int *a;
+	struct student *a;
 	printf("Enter Requirement : ");
 	scanf("%d",&n);
-	a = (int*)malloc(sizeof(int)*n);
+	a = (struct student*)malloc(sizeof(struct student)*n);
 	for(int i=0;i<n;i++) 
 	{
-		printf("Enter data : ");
-		scanf("%d", a+i);
+		printf("Enter id : ");
+		scanf("%d", &a[i].id);
+		printf("now Enter name : ");
+		scanf("%s", a[i].name);
 	}
-	quickSort(a,n,sizeof(int),mycomparator);
-	for(int i=0;i<n;i++)	printf("%d ",a[i]);
+	quickSort(a,n,sizeof(struct student),mycomparator);
+	for(int i=0;i<n;i++)	printf("%d %s\n", a[i].id, a[i].name);
 	free(a);
 	return 0;
 }
