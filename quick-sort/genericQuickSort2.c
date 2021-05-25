@@ -2,6 +2,32 @@
 #include<stdlib.h>
 #include<stdbool.h>
 #include<string.h>
+struct Node
+{
+	int lb, ub;
+	struct Node* next;
+};
+struct Node* top;
+void push(int lb, int ub)
+{
+	struct Node* t = (struct Node*)malloc(sizeof(struct Node));
+	t->lb = lb;
+	t->ub = ub;
+	t->next = top;
+	top = t;
+}
+void pop(int* lb, int* ub)
+{
+	struct Node* t = top;
+	*lb = t->lb;
+	*ub = t->ub;
+	top=top->next;
+	free(t);
+}
+int isEmpty()
+{
+	return (top == NULL);
+}
 void swap(void *i, void *j, int es)
 {
 	void* block = malloc(es);
@@ -10,23 +36,16 @@ void swap(void *i, void *j, int es)
 	memcpy(j,(const void*)block,es);
 	free(block);
 }
-void quickSort(void *a, int cs, int es, int (*p2f)(void*, void*))
+void quickSort(void *a, int lb, int ub, int es, int (*p2f)(void*, void*))
 {
-	int lb,ub,e,f;
-	int top = cs;
-	int *slb = (int*)malloc(sizeof(int)*cs);
-	int *sub = (int*)malloc(sizeof(int)*cs);
-	//push
-	top--;
-	slb[top] = 0;
-	sub[top] = cs-1;
-	//
-	while(top!=cs)
+	int e,f;
+	push(lb,ub);
+	while(!isEmpty())
 	{	
 		//pop
-		e = lb = slb[top];
-		f = ub = sub[top];
-		top++;
+		pop(&lb,&ub);
+		e = lb;
+		f = ub;
 		while(e<f)
 		{
 			// while(e<ub && a[e] <= a[lb]) e++;
@@ -39,20 +58,20 @@ void quickSort(void *a, int cs, int es, int (*p2f)(void*, void*))
 		if(f+1 < ub)
 		{
 			//push
-			top--;
-			slb[top] = f+1;
-			sub[top] = ub;
+			// top--;
+			// slb[top] = f+1;
+			// sub[top] = ub;
+			push(f+1, ub);
 		}
 		if(f-1 > lb)
 		{
 			//push
-			top--;
-			slb[top] = lb;
-			sub[top] = f-1;
+			// top--;
+			// slb[top] = lb;
+			// sub[top] = f-1;
+			push(lb, f-1);
 		}
 	}
-	free(slb);
-	free(sub);
 }
 
 ///////////////////////////////
@@ -70,6 +89,7 @@ int mycomparator(void* i, void* j)
 }
 int main()
 {
+	top = NULL;
 	int n;
 	struct student *a;
 	printf("Enter Requirement : ");
@@ -82,7 +102,7 @@ int main()
 		printf("now Enter name : ");
 		scanf("%s", a[i].name);
 	}
-	quickSort(a,n,sizeof(struct student),mycomparator);
+	quickSort(a,0,n-1,sizeof(struct student),mycomparator);
 	for(int i=0;i<n;i++)	printf("%d %s\n", a[i].id, a[i].name);
 	free(a);
 	return 0;
