@@ -33,8 +33,11 @@ void push(Stack* stack,const void* data)
 void pop(Stack* stack, void* data)
 {
 	memcpy(data,stack->top->data,stack->elementSize);
+	free(stack->top->data);
+	SatckNode t = stack->top;
 	stack->top = stack->top->next;
 	stack->size--;
+	free(t);
 }
 
 int isEmpty(Stack* stack)
@@ -60,4 +63,4 @@ int main()
 		printf("%d ",x);
 	}
 	return 0;
-}
+}	
