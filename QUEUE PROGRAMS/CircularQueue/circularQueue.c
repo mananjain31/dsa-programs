@@ -72,7 +72,7 @@ void dequeue()
 	{
 		front = (front+1) % MAX;
 	}
-}
+}	
 
 void showAll()
 {

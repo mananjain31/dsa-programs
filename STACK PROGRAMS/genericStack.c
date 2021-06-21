@@ -22,7 +22,7 @@ void initStack(Stack* stack, int elementSize)
 }
 void push(Stack* stack,const void* data)
 {
-	StackNode* t = (void*)malloc(sizeof(StackNode)); 
+	StackNode* t = (StackNode*)malloc(sizeof(StackNode)); 
 	t->data = (void*)malloc(stack->elementSize);
 	memcpy(t->data,data, stack->elementSize);
 	t->next = stack->top;
@@ -32,9 +32,9 @@ void push(Stack* stack,const void* data)
 
 void pop(Stack* stack, void* data)
 {
-	memcpy(data,stack->top->data,stack->elementSize);
+	memcpy(data,(const void*)stack->top->data,stack->elementSize);
 	free(stack->top->data);
-	SatckNode t = stack->top;
+	StackNode* t = stack->top;
 	stack->top = stack->top->next;
 	stack->size--;
 	free(t);

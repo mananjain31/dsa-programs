@@ -55,6 +55,7 @@ void enqueue()
 	}
 }
 
+
 void dequeue()
 {
 	if(rear == -1 || front > rear)
