@@ -73,26 +73,29 @@ queue->size = 0;
 
 int main()
 {
-int x[10];
+int *x;
 int n,i,j,k,m,len,max,min;
 Queue queue[10];
+printf("Enter No. of Elements : ");
+scanf("%d", &n);
+x = malloc(sizeof(int)*n);
 for(i=0;i<10;i++) initQueue(&queue[i]);
-for(i=0;i<10;i++)
+for(i=0;i<n;i++)
 {
 printf("Enter a Number : ");
 scanf("%d", &x[i]);
 }
 min = x[0];
-for(i=1;i<10;i++) if(x[i]<min) min = x[i];
-for(i=0;i<10;i++) x[i] -= min;
+for(i=1;i<n;i++) if(x[i]<min) min = x[i];
+for(i=0;i<n;i++) x[i] -= min;
 max = x[0];
-for(i=1;i<10;i++) if(x[i]>max) max = x[i];
+for(i=1;i<n;i++) if(x[i]>max) max = x[i];
 len = 1;
 while(len <= max) len*=10;
 
 for(i=1; i<=len; i*=10)
 {
-for(j=0;j<10;j++)
+for(j=0;j<n;j++)
 {
 k = x[j]/i;
 k = k%10;
@@ -107,8 +110,9 @@ x[k++] = removeFromQueue(&queue[m]);
 }
 }
 }
-for(i=0;i<10;i++) x[i] += min;
-for(i=0;i<10;i++) clearQueue(&queue[i]);
-for(i=0;i<10;i++) printf("%d\n", x[i]);;
+for(i=0;i<n;i++) x[i] += min;
+for(i=0;i<n;i++) clearQueue(&queue[i]);
+for(i=0;i<n;i++) printf("%d\n", x[i]);;
+free(x);
 return 0;
 }
