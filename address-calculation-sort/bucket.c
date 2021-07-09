@@ -56,6 +56,11 @@ return data;
 
 int isEmptyBucket(Bucket* bucket){return bucket->size == 0;}
 
+void clearBucket(Bucket *bucket)
+{
+while(!isEmptyBucket(bucket))dequeueBucket(bucket);
+}
+
 int main()
 {
 int n,i;
@@ -80,6 +85,7 @@ while(!isEmptyBucket(&bucket))
 {
 printf("%d ", dequeueBucket(&bucket));
 }
+clearBucket(&bucket);
 free(a);
 return 0;
 }
