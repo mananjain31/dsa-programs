@@ -68,22 +68,55 @@ return key;
 
 void addressCalculationSort(int *a, int si, int ei)
 {
-int pos,max,i,j,key;
+int negpos,pos,len,i,j,key,min,max;
 Bucket buckets[10];
+Bucket negbuckets[10];
 max = a[si];
-for(i=si;i<=ei;i++) if(max<a[i]) max = a[i];
-if(max == 0)return;
+min = a[si];
+for(i=si;i<=ei;i++) 
+{
+if(max<a[i]) max = a[i];
+if(min>a[i]) min = a[i];
+}
+if(min == max) return;
 for(i=0;i<10;i++)initBucket(&buckets[i]);
+if(min < 0) for(i=0;i<10;i++)initBucket(&negbuckets[i]);
 pos = 1;
 while(max/pos != 0) pos*=10;
 pos = pos/10;
+if(min < 0)
+{
+negpos = 1;
+while(min/negpos != 0) negpos*=10;
+negpos = negpos/10;
+}
 //inserting values into the buckets
 for(i=si;i<=ei;i++)
+{
+if(a[i]<0)
+{
+key = -1*(hash(a[i],negpos)); // for getting the key positive
+sortedInsert(&negbuckets[9-key],a[i]); // for order preservance
+}
+else
 {
 key = hash(a[i],pos);
 sortedInsert(&buckets[key],a[i]);
 }
-j=0;
+}
+j=si;
+if(min < 0)
+{
+for(i=0;i<10;i++)
+{
+while(!isEmptyBucket(&negbuckets[i]))
+{
+a[j] = dequeueBucket(&negbuckets[i]);
+j++;
+}
+}
+}
+
 for(i=0;i<10;i++)
 {
 while(!isEmptyBucket(&buckets[i]))
@@ -98,7 +131,7 @@ int main()
 {
 int n,i;
 int *a;
-printf("Enter Collection size : ");
+printf("Enter Collection size -> ");
 scanf("%d", &n);
 a = (int*)malloc(sizeof(int)*n);
 for(i=0;i<n;i++)
