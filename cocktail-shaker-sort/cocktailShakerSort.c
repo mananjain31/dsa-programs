@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-void cockTailSort(int* a, int lb, int ub)
+void cockTailShakerSort(int* a, int lb, int ub)
 {
 int i,swapped;
 while(lb<ub)
@@ -47,7 +47,7 @@ for(i=0;i<n;i++)
 printf("enter a number : ");
 scanf("%d", a+i);
 }
-cockTailSort(a,0,n-1);
+cockTailShakerSort(a,0,n-1);
 for(i=0;i<n;i++)printf("%d\n",a[i]);
 free(a);
 return 0;
