@@ -4,8 +4,7 @@ int power(int* a, int b, int p)
 {
 if(p == 1) return b;
 if(a[p]!=-1)return a[p];
-if(p%2 == 0) a[p] = power(a,b,p/2)*power(a,b,p/2);
-else a[p] = b*power(a,b,p/2)*power(a,b,p/2);
+a[p] = (p%2==0) ? power(a,b,p/2)*power(a,b,p/2) : b*power(a,b,p/2)*power(a,b,p/2);
 return a[p];
 }
 int calculatePower(int b, int p)
