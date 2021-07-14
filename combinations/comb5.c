@@ -10,7 +10,7 @@ void swap(char* i, char* j)
 }
 void _findAllCombinations(char* str,int s, int e)
 {
-int i;
+int i,j;
 if(s==e)
 {
 printf("%s\n",str);
@@ -19,6 +19,8 @@ return;
 }
 for(i=s;i<=e;i++)
 {
+for(j=s;j<i;j++)if(str[j]==str[i]) break;
+if(j<i)continue;
 swap(str+s,str+i);
 _findAllCombinations(str,s+1,e);
 swap(str+s,str+i);
