@@ -57,7 +57,7 @@ class Iterative
 	    		int vNext = next.v;
 	    		int wCurr = curr.w;
 	    		int wNext = next.w;
-	    		if(vCurr < wNext && wCurr < wNext)
+	    		if(vCurr < vNext && wCurr < wNext)
 	    		{
 	    			e++;
 	    			continue;
