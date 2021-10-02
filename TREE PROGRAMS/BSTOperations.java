@@ -12,9 +12,10 @@ class BSTOperation
 			System.out.println("1 Insert");
 			System.out.println("2 Inorder Iterative traversal");
 			System.out.println("3 Preorder Iterative traversal");
-			System.out.println("4 Delete Node");
-			System.out.println("5 Count Number of leaf Nodes");
-			System.out.println("6 Count Number of levels");
+			System.out.println("4 Postorder Iterative traversal");
+	//		System.out.println("5 Delete Node"); // contains bugs
+			System.out.println("6 Count Number of leaf Nodes");
+			System.out.println("7 Count Number of levels");
 			System.out.print("Your Choice : ");
 			choice = sc.nextInt();
 			if(choice == 1){
@@ -24,12 +25,15 @@ class BSTOperation
 				bst.inorderIterative();
 			} else if(choice == 3) {
 				bst.preorderIterative();
-			} else if(choice == 4){
+			} else if(choice == 4) {
+				bst.postorderIterative();
+			} else if(choice == 5){/*
 				System.out.print("Enter Number to delete : ");
 				bst.delete(sc.nextInt());
-			} else if(choice == 5){
-				System.out.println("Number of leaf nodes are : " + bst.countLeaves());
+				*/
 			} else if(choice == 6){
+				System.out.println("Number of leaf nodes are : " + bst.countLeaves());
+			} else if(choice == 7){
 				System.out.println("Number of levels : " + bst.countLevels());
 			}
 		}while(choice != 0);
@@ -82,6 +86,10 @@ class BST
 	}
 
 	//deletion Code
+	/*
+
+	 contains bugs
+
 	BSTNode delete(int data)
 	{
 		BSTNode node = root;
@@ -116,7 +124,7 @@ class BST
 
 		// making the parent of replacing node to point at the right node of replacing node 
 		// in place of replacingNode
-		if(replacingNodeParent.right == replacingNode) replacingNodeParent.right = replacingNode.left;
+		if(replacingNodeParent.right == replacingNode) replacingNodeParent.right = replacingNode.left;	
 		else replacingNodeParent.left = replacingNode.left;
 
 		// replacing the node to its replacingNode
@@ -127,6 +135,7 @@ class BST
 		else parent.right = replacingNode;
 		return node;
 	}
+	*/
 
 	private BSTNode insert(BSTNode node,int data)
 	{
@@ -178,6 +187,36 @@ class BST
 				node = node.left;
 			}
 		}
+		System.out.println();
+	}
+	void postorderIterative()
+	{
+
+		Stack<BSTNode> stack = new Stack<>();
+		BSTNode t = root;
+		if(root!=null)
+		do{
+			while(t!=null)
+			{
+				if(t.right!=null) stack.push(t.right);
+				stack.push(t);
+				t = t.left;
+			}
+			t = stack.pop();
+			BSTNode peek = null;
+			if(!stack.isEmpty()) peek = stack.peek(); 
+			if(t.right == peek)
+			{
+				stack.pop();
+				stack.push(t);
+				t = t.right;
+			}
+			else
+			{
+				System.out.print(t.data + " ");
+				t = null;
+			}
+		}while(!stack.isEmpty());
 		System.out.println();
 	}	
 }
