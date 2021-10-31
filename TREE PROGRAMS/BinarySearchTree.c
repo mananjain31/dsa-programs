@@ -16,6 +16,7 @@ void postorder(struct Node*);
 void iterativeInorder(struct Node*);
 void iterativePreorder(struct Node*);
 void iterativePostorder(struct Node*);
+int diameter(struct Node*);
 
 				
 int main()
@@ -31,6 +32,7 @@ int main()
 		printf("5. Iterative inorder Traversal\n");
 		printf("6. Iterative Preorder Traversal\n");
 		printf("7. Iterative Postorder Traversal\n");
+		printf("8. Diameter of the Tree\n");
 		printf("0. Exit\n");
 		printf("Your Choice : ");
 		scanf("%d", &ch);
@@ -59,12 +61,31 @@ int main()
 			case 7:
 				iterativePostorder(root);
 				break;
+			case 8:
+				printf("Diameter : %d\n", diameter(root));
+				break;
 			case 0:
 				ch = 0;
 				break;
 		}
 	}
 	return 0;
+}
+
+
+int _diameter(struct Node* root, int* diameter)
+{
+	if(!root) return 0;
+	int lh = _diameter(root->left, diameter);
+	int rh = _diameter(root->right, diameter);
+   	*diameter = lh+rh > *diameter ? lh+rh : *diameter;
+    return 1 + (lh > rh ? lh : rh);
+}
+int diameter(struct Node* root)
+{
+	int diameter = 0;
+	_diameter(root, &diameter);
+	return diameter;
 }
 
 struct Node* insert(struct Node* root, int data)
