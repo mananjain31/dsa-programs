@@ -38,7 +38,7 @@ public class LargestSquareSubmatrix {
                 if (matrix[i][j] == 0)
                     dp[i][j] = 0;
                 else if (i == 0 || j == 0)
-                    dp[i][j] = 1;
+                    dp[i][j] = matrix[i][j];
                 else
                     ans = Math.max(
                             ans,
